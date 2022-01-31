@@ -6208,6 +6208,11 @@ svg#sun {
   height: 710px;
 }
 
+.addCardCrearGrupo{
+  overflow-y:hidden;
+  overflow-x: hidden;
+  height: 500px;
+}
 
 
 

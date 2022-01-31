@@ -215,8 +215,14 @@ $(document).ready(function() {
     $('#example-single').multiselect();
 
     // Multi Select
-    $('#example-multiple-selected').multiselect();
-
+    $('#example-multiple-selected0').multiselect();
+    $('#example-multiple-selected1').multiselect();
+    $('#example-multiple-selected2').multiselect();
+	$('#example-multiple-selected3').multiselect();
+	$('#example-multiple-selected4').multiselect();
+	$('#example-multiple-selected5').multiselect();
+	//$('.example-multiple-selected').multiselect();
+	
     // Multi Group Select
     $('#example-multiple-optgroups').multiselect();
 
@@ -235,8 +241,8 @@ $(document).ready(function() {
         enableCollapsibleOptGroups: true
     });
     $('.searchable').multiSelect({
-        selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='try \"12\"'>",
-        selectionHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='try \"4\"'>",
+        selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Usuarios por añadir'>",
+        selectionHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Usuarios ya añadidos'>",
         afterInit: function(ms) {
             var that = this,
                 $selectableSearch = that.$selectableUl.prev(),

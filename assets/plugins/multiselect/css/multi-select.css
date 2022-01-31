@@ -1,6 +1,11 @@
 .ms-container{
   background: transparent url('../img/switch.png') no-repeat 50% 50%;
-  width: 370px;
+  width: 640px; /* 370px por defecto*/
+}
+
+.ms-container2{
+  background: transparent url('../img/switch.png') no-repeat 50% 50%;
+  width: 240px; /* 370px por defecto*/
 }
 
 .ms-container:after{

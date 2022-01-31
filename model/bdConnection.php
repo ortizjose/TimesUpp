@@ -144,7 +144,7 @@ class LibraryQueries {
 
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO WHERE IdUsu = $id ");
+		$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO WHERE IdUsu = $id ORDER BY idGrupo");
 
 		if ($sentence->execute()) 
 		{
@@ -270,6 +270,63 @@ class LibraryQueries {
 
 	}	
 
+	public function getNombreContactos($idUsu)
+	{
+
+		$contactos = array();
+
+		$i = 0;
+
+		$sentence = $this -> dbc->prepare(" SELECT Nombre, IdUsu FROM USUARIO WHERE IdUsu = ( SELECT IdUsu1 FROM CONTACTOS WHERE IdUsu2 = $idUsu) 
+		OR IdUsu = (SELECT IdUsu2 FROM CONTACTOS WHERE IdUsu1 = $idUsu) ");
+
+		if ($sentence->execute()): 
+			while ($row = $sentence->fetch()):
+		
+				$contactos[$i] = $row;
+				$i++;
+		
+			endwhile;
+		endif;
+		
+		return $contactos;
+	}	
+	
+	public function getNombreUsuario($idUsu){
+		
+		$sentence = $this -> dbc->prepare("SELECT Nombre FROM USUARIO WHERE IdUsu = $idUsu;");
+
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;	
+		endif;
+		
+	}
+
+
+	public function getIntegrantesGrupo($idGrupo, $idUsu)
+	{
+
+		$integrantes = array();
+
+		$i = 0;
+
+		$sentence = $this -> dbc->prepare("SELECT Nombre, IdUsu FROM USUARIO WHERE IdUsu IN (SELECT IdUsu FROM GRUPO WHERE IdGrupo = '$idGrupo') AND IdUsu != '$idUsu' ");
+
+		if ($sentence->execute()):
+			while ($row = $sentence->fetch()):
+				
+				$integrantes[$i] = $row;
+				$i++;
+		
+			endwhile;
+		endif;
+
+		return $integrantes;
+	}	
+	
+	
 
 }
 ?>

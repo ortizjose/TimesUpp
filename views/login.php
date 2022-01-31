@@ -6,7 +6,7 @@ $s = new SessionBean();
 
     if ( isset($_SESSION['Usuario'])){
 		echo "| Usuario : {$_SESSION['Usuario']} | Id :{$_SESSION['Id']}";
-		//session_destroy();
+		session_destroy();
     	//header('Location: index.php');  
 	}
 	

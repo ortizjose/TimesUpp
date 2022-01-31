@@ -38,8 +38,6 @@ include '..\controller\sessionBean.php';
 	
 	}
 	elseif ( !empty($_POST['borraActividad']) ){ 
-	
-		echo "$_POST[borraActividad]";
 
 		$res =  $q ->borrarActividad($_POST['borraActividad']);
 		
