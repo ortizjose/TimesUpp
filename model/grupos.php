@@ -48,14 +48,14 @@ class Grupos {
 	{
 		$return = 0;
 		
-		if (empty($idGrupo)):
+		if (empty($idGrupo) ):
 		
 			$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO GROUP BY IdGrupo ORDER BY IdGrupo DESC LIMIT 0,1");
 
 			$sentence->execute();
 			$grupo=$sentence->fetch();
-			
-			$idGrupo = $grupo[IdGrupo] + 1;
+
+			$idGrupo = $grupo['IdGrupo'] + 1;
 			$return = 1;
 		
 		endif;

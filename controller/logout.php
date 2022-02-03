@@ -1,10 +1,9 @@
 <?php
 
-	include '../includes/session.php';
-
-	$s = new UsuarioSession();
+include '..\controller\sessionBean.php';
+	$s = new SessionBean();
 
 	$s -> closeSession();
 
-    header('Location: ../login.php');
+    header('Location: ..\views\login.php');
 ?>

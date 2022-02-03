@@ -38,10 +38,10 @@ include '..\model\grupos.php';
 		$g ->borrarGrupo($_POST['idGrupo']);
 	
 		// PRIMERO ES EL ADMIN DEL GRUPO
-		$g ->anadirGrupo($_POST['modificarGrupo'], $idUsu, $_POST[idGrupo]);	
+		$g ->anadirGrupo($_POST['modificarGrupo'], $idUsu, $_POST['idGrupo']);	
 		
 		foreach($_POST['integrantesModificarGrupo'] as $integrante ):
-			$res = $g ->anadirGrupo($_POST['modificarGrupo'], $integrante, $_POST[idGrupo]);
+			$res = $g ->anadirGrupo($_POST['modificarGrupo'], $integrante, $_POST['idGrupo']);
 			//echo $integrante;
 		endforeach;		
 		

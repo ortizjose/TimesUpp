@@ -420,7 +420,7 @@ $q = new LibraryQueries();
 										  <div class="form-group row">
 											 <label for="example-text-input" class="col-xs-3 col-form-label form-control-label">Nuevo Nombre</label>
 											 <div class="col-sm-6">
-												<input class="form-control" type="text" name="modificarActividad" placeholder="<?= $actividad['Nombre'] ?>" required="required">
+												<input class="form-control" type="text" name="modificarActividad" placeholder="<?= $actividad['Nombre'] ?>" value="<?= $actividad['Nombre'] ?>" >
 											 </div>
 											  
 										  </div>

@@ -6,7 +6,6 @@ $s = new SessionBean();
 
     if ( isset($_SESSION['Usuario'])){
 		echo "| Usuario : {$_SESSION['Usuario']} | Id :{$_SESSION['Id']}";
-		session_destroy();
     	//header('Location: index.php');  
 	}
 	
@@ -135,7 +134,7 @@ $s = new SessionBean();
 						<!-- <div class="card-footer"> -->
 						<div class="col-sm-12 col-xs-12 text-center">
 							<span class="text-muted">¿No tienes una cuenta?</span>
-							<a href="register2.html" class="f-w-600 p-l-5">Regístrate ahora</a>
+							<a href="register.php" class="f-w-600 p-l-5">Regístrate ahora</a>
 						</div>
 
 						<!-- </div> -->
@@ -151,50 +150,7 @@ $s = new SessionBean();
 	<!-- end of container-fluid -->
 </section>
 
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!--[if lt IE 9]>
-<div class="ie-warning">
-	<h1>Warning!!</h1>
-	<p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-	<div class="iew-container">
-		<ul class="iew-download">
-			<li>
-				<a href="http://www.google.com/chrome/">
-					<img src="assets/images/browser/chrome.png" alt="Chrome">
-					<div>Chrome</div>
-				</a>
-			</li>
-			<li>
-				<a href="https://www.mozilla.org/en-US/firefox/new/">
-					<img src="assets/images/browser/firefox.png" alt="Firefox">
-					<div>Firefox</div>
-				</a>
-			</li>
-			<li>
-				<a href="http://www.opera.com">
-					<img src="assets/images/browser/opera.png" alt="Opera">
-					<div>Opera</div>
-				</a>
-			</li>
-			<li>
-				<a href="https://www.apple.com/safari/">
-					<img src="assets/images/browser/safari.png" alt="Safari">
-					<div>Safari</div>
-				</a>
-			</li>
-			<li>
-				<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-					<img src="assets/images/browser/ie.png" alt="">
-					<div>IE (9 & above)</div>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
+
 <!-- Required Jqurey -->
 <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
 <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>

@@ -22,6 +22,7 @@ class SessionBean{
         $q = new LibraryQueries();
 
         $_SESSION['Usuario']=$usuario;
+		$_SESSION['Nombre']= $q -> getNombreUsuario($usuario);
         $_SESSION['Id']= $q -> getIdUsuario($usuario);
         $_SESSION['Start']= time();
         $_SESSION['Expire'] = $_SESSION['Start'] + (30*60);
@@ -32,6 +33,10 @@ class SessionBean{
 
         return $_SESSION['Usuario'];
     }
+	
+	public function getNombreActualUsuario(){
+		return $_SESSION['Nombre'];		
+	}
 
     public function getIdActualUsuario(){
 

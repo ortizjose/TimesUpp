@@ -34,7 +34,7 @@ class LibraryQueries {
 	public function comprobarLogin($usuario, $contrasena)
 	{
 
-		$peticion="SELECT Nombre FROM USUARIO WHERE Nombre='$usuario'";
+		$peticion="SELECT Nombre FROM USUARIO WHERE Usuario='$usuario'";
 
 		$sentence= $this-> dbc->prepare($peticion);
 		if ($sentence->execute())
@@ -54,7 +54,7 @@ class LibraryQueries {
 
    	 	$contrasena=md5($contrasena);
 
-   	 	$peticion="SELECT Contrasena FROM USUARIO WHERE Nombre='$usuario'";
+   	 	$peticion="SELECT Contrasena FROM USUARIO WHERE Usuario='$usuario'";
 		$sentence= $this-> dbc->prepare($peticion);
 
 		if ($sentence->execute())
@@ -76,16 +76,26 @@ class LibraryQueries {
 
 	}
 
-	public function getIdUsuario($user)
+	public function getIdUsuario($usuario)
 	{
 
-		$sentence = $this -> dbc->prepare("SELECT IdUsu FROM USUARIO WHERE Nombre='$user'");
+		$sentence = $this -> dbc->prepare("SELECT IdUsu FROM USUARIO WHERE Usuario='$usuario'");
 		$sentence->execute();
 		$id=$sentence->fetch();	
 
 		return $id[0];
 	}
 
+	public function getNombreUsuario($usuario)
+	{
+
+		$sentence = $this -> dbc->prepare("SELECT Nombre FROM USUARIO WHERE Usuario='$usuario'");
+		$sentence->execute();
+		$id=$sentence->fetch();	
+
+		return $id[0];
+	}	
+	
 
 	public function getIdActividadesUsuario($id)
 	{
@@ -292,7 +302,7 @@ class LibraryQueries {
 		return $contactos;
 	}	
 	
-	public function getNombreUsuario($idUsu){
+	public function getUsuario($idUsu){
 		
 		$sentence = $this -> dbc->prepare("SELECT Nombre FROM USUARIO WHERE IdUsu = $idUsu;");
 
