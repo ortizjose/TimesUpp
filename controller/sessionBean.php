@@ -42,7 +42,7 @@ class SessionBean{
 
         return $_SESSION['Id'];
     }
-
+	
 
     public function closeSession(){
 

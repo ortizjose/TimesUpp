@@ -287,8 +287,8 @@ class LibraryQueries {
 
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare(" SELECT Nombre, IdUsu FROM USUARIO WHERE IdUsu = ( SELECT IdUsu1 FROM CONTACTOS WHERE IdUsu2 = $idUsu) 
-		OR IdUsu = (SELECT IdUsu2 FROM CONTACTOS WHERE IdUsu1 = $idUsu) ");
+		$sentence = $this -> dbc->prepare(" SELECT Nombre, IdUsu FROM USUARIO WHERE IdUsu = ANY ( SELECT IdUsu1 FROM CONTACTOS WHERE IdUsu2 = $idUsu) 
+		OR IdUsu = ANY (SELECT IdUsu2 FROM CONTACTOS WHERE IdUsu1 = $idUsu) ");
 
 		if ($sentence->execute()): 
 			while ($row = $sentence->fetch()):

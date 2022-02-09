@@ -118,6 +118,15 @@ ul {
   display: inline-block;
   vertical-align: middle; }
 
+.card-header-text-2 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  margin-bottom: rgba(51, 51, 51, 0.85);
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  vertical-align: middle; }
+
 .card-header {
   padding: 20px;
   background-color: transparent;
@@ -144,7 +153,8 @@ textarea {
   overflow: hidden; }
 
 .form-inline label {
-  margin-bottom: 5px !important; }
+  margin-bottom: 5px !important; 
+  margin-right: 20px; }
 
 .able-logo {
   display: inline-block;
@@ -1116,7 +1126,7 @@ textarea {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #2196F3; }
+  background-color: #3D505A; }
   .error-400 h1,
   .error-403 h1,
   .error-404 h1,
@@ -6212,6 +6222,20 @@ svg#sun {
   overflow-y:hidden;
   overflow-x: hidden;
   height: 500px;
+}
+
+.addCardContactos{
+  overflow-y:auto;
+  overflow-x: hidden;
+  height: 773px;	
+	
+}
+
+.addCardContactosPendientes{
+  overflow-y:auto;
+  overflow-x: hidden;
+  height: 505px;	
+	
 }
 
 

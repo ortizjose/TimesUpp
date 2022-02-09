@@ -13,7 +13,6 @@ $q = new LibraryQueries();
 
 require '..\views\templates\header2.html';
 require '..\views\templates\navbar.html';
-//require '..\views\templates\rest.html';
 
 ?>
 
