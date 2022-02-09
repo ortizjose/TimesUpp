@@ -1,0 +1,48 @@
+03/02/2022
+- Se ha añadido botón "Iniciar Sesión" cuando se registra correctamente. (No se porque se pasa "?" en la URL)
+- A la hora de añadir Usuarios se controlará que no se añadan usuarios con el mismo nombre. (No se hace distincion de mayus/minus a la hora de comprobar esto e iniciar sesión)
+
+05/02/2022
+- Dentro de Contactos, el "Añadir nuevo Contacto" contempla 4 casos; Que no exista el ususario; Que el usuario ya tenga petición; Que el usuario ya sea contacto; Que se envie correctamente.
+
+08/02/2022
+- Peticiones contacto separadas en salientes/entrantes. Cuando no hay peticiones sale un caso default.
+
+09/02/2022
+- Terminado el rechazar una petición saliente.
+- Comprobado el aceptar/rechazar desde un lado y otro (usando admin y maxi2)
+- Hecha página de Error.
+- Arreglada la mayoria de dudas comentadas con Antonio.
+- Página de mi Perfil
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+COSAS PENDIENTES
+
+*GENERICO
+- Separar Actividad del mismo archivo bd
+- Unificar todo el modelo de usuario en el mismo archivo
+- GenericDB para navbar y demas
+- Mostrar el usuario en mavbar para version movil
+
+*ACTIVIDAD
+- Meter en Actividad idGrupo como FK y tirar de idGrupo o idUsu según sea grupal o no
+
+
+*CONTACTOS
+- Cuando no hay contactos poner un caso default como en Peticiones pendientes
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+DUDAS
+- Quiero añadir fotos de perfil (con una default). He visto que guardar las fotos en bbdd puede ralentizar mucho el proceso de consulta y que es mejor en local y lo que se guarda en en la base de datos es la ruta ¿Que os parece?¿Algo a mejorar? 
+- Nombre de contacto mirar tamaño en pixeles ( Ahora mismo style="max-width:50%")
+
+
+DUDAS RESUELTAS
+- Poner el "Usuario" en mas informacion de los contactos? Se muestra el usuario y se ha cambiado la estetica de muestra de informacion
+- ¿Que os parecen los 4 casos de "Añadir nuevo Contacto" seguidos en el codigo html? Cambiado a switch/case
+- Cuando se comprueba si hay contactos pendientes, se tira de la misma funcion que de traer toda la lista de contactos pendientes ¿Carmbiar verdad? Se ha metido en variable
