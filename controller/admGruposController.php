@@ -1,14 +1,12 @@
 <?php 
-include '..\model\bdConnection.php';
 include '..\controller\sessionBean.php';
-include '..\model\grupos.php';	
-	$q = new LibraryQueries();
-	$s = new SessionBean();
-	$g = new Grupos();
+include '..\model\grupoDB.php';	
+$s = new SessionBean();
+$gr = new GrupoDB();
 
 	$idUsu = $s -> getIdActualUsuario();
 
-    if(empty($q->dbc)){
+    if(empty($gr->dbc)){
         echo "<h3 align='center'>¡Error!: No se pudo establecer la conexión con la base de datos.</h3><br/>";
         die();
     }
@@ -16,10 +14,10 @@ include '..\model\grupos.php';
     if ( !empty($_POST['integrantesNuevoGrupo']) ){ 		// NUEVA ACTIVIDAD
 			
 		// PRIMERO ES EL ADMIN DEL GRUPO
-		$idGrupo = $g ->anadirGrupo($_POST['nuevoGrupo'], $idUsu, NULL);
+		$idGrupo = $gr ->anadirGrupo($_POST['nuevoGrupo'], $idUsu, NULL);
 		
 		foreach($_POST['integrantesNuevoGrupo'] as $integrante ):
-			$res = $g ->anadirGrupo($_POST['nuevoGrupo'], $integrante, $idGrupo);
+			$res = $gr ->anadirGrupo($_POST['nuevoGrupo'], $integrante, $idGrupo);
 		endforeach;
 	
 	    if($res){ 
@@ -35,13 +33,13 @@ include '..\model\grupos.php';
 		echo "$_POST[idGrupo]";
 		echo "xx $_POST[modificarGrupo] xx";
 		
-		$g ->borrarGrupo($_POST['idGrupo']);
+		$gr ->borrarGrupo($_POST['idGrupo']);
 	
 		// PRIMERO ES EL ADMIN DEL GRUPO
-		$g ->anadirGrupo($_POST['modificarGrupo'], $idUsu, $_POST['idGrupo']);	
+		$gr ->anadirGrupo($_POST['modificarGrupo'], $idUsu, $_POST['idGrupo']);	
 		
 		foreach($_POST['integrantesModificarGrupo'] as $integrante ):
-			$res = $g ->anadirGrupo($_POST['modificarGrupo'], $integrante, $_POST['idGrupo']);
+			$res = $gr ->anadirGrupo($_POST['modificarGrupo'], $integrante, $_POST['idGrupo']);
 			//echo $integrante;
 		endforeach;		
 		
@@ -58,7 +56,7 @@ include '..\model\grupos.php';
 	
 		//echo "$_POST[borraGrupo]";
 
-		$res =  $g ->borrarGrupo($_POST['borraGrupo']);
+		$res =  $gr ->borrarGrupo($_POST['borraGrupo']);
 		
 	    if($res){ 
 			

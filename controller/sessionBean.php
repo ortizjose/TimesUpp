@@ -1,6 +1,5 @@
 <?php
 
-
 class SessionBean{
 
     public function __construct(){
@@ -19,13 +18,16 @@ class SessionBean{
 
     public function setActualUsuario($usuario){
 
-        $q = new LibraryQueries();
+        $u = new UsuarioDB();
+		
+		$usuarioActual = $u -> getUsuario($u -> getIdUsuario($usuario));
 
         $_SESSION['Usuario']=$usuario;
-		$_SESSION['Nombre']= $q -> getNombreUsuario($usuario);
-        $_SESSION['Id']= $q -> getIdUsuario($usuario);
+		$_SESSION['Nombre']= $usuarioActual[0]['Nombre'];
+        $_SESSION['Id']= $usuarioActual[0]['IdUsu'];
         $_SESSION['Start']= time();
         $_SESSION['Expire'] = $_SESSION['Start'] + (30*60);
+		$_SESSION['Foto'] = $usuarioActual[0]['Foto']; 
 		
     }
 
@@ -43,7 +45,14 @@ class SessionBean{
         return $_SESSION['Id'];
     }
 	
-
+	public function getFotoActualUsuario(){
+		return $_SESSION['Foto'];
+	}
+	
+	public function setFotoActualUsuario($foto){
+		 $_SESSION['Foto']=$foto;
+	}
+	
     public function closeSession(){
 
         session_unset();

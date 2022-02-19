@@ -1,8 +1,6 @@
 <?php
 include '..\controller\sessionBean.php';
-include '..\model\bdConnection.php';
 $s = new SessionBean();
-$q = new LibraryQueries();
   
   $IdUsu = $s -> getIdActualUsuario();
 

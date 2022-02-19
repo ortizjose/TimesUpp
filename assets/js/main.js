@@ -320,3 +320,13 @@ $(document).ready(function() {
     });
 });
 // End [ Menu ]
+
+// Foto de Perfil
+
+$(document).getElementById("fotoPerfil").onchange = function(){
+	document.getElementById('formFotoPerfil').submit();
+} 
+
+
+// Final Foto de Perfil
+

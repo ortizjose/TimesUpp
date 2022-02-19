@@ -1,8 +1,8 @@
 <?php
 include '..\controller\sessionBean.php';
-include '..\model\bdConnection.php';
+include '..\model\genericDB.php';
 $s = new SessionBean();
-$q = new LibraryQueries();
+$g = new GenericDB();
   
   $IdUsu = $s -> getIdActualUsuario();
 
@@ -184,7 +184,7 @@ require '..\views\templates\navbar.html';
 
                         <div class="card-block button-list">
 
-						<?php foreach (($q -> getActividadesUsuario($IdUsu)) as $actividad): ?>
+						<?php foreach (($g -> getActividadesUsuario($IdUsu)) as $actividad): ?>
 
 							<button type="button" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para ir a al apartado de la actividad"> 
 							<?= $actividad['Nombre'] ?>

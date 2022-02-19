@@ -1,57 +1,48 @@
 <?php 
-include '..\model\bdConnection.php';
 include '..\controller\sessionBean.php';
-	
-	$q = new LibraryQueries();
-	$s = new SessionBean();
+include '..\model\actividadDB.php';	
+$s = new SessionBean();
+$a = new ActividadDB();
 
 	$idUsu = $s -> getIdActualUsuario();
 
-    if(empty($q->dbc)){
+    if(empty($a->dbc)){
         echo "<h3 align='center'>¡Error!: No se pudo establecer la conexión con la base de datos.</h3><br/>";
         die();
     }
 
     if ( !empty($_POST['nuevaActividad']) ){ 		// NUEVA ACTIVIDAD
 
-	    $res = $q ->anadirActividad($_POST['nuevaActividad'], $idUsu, $_POST['grupoNuevaActividad']);
+	    $res = $a ->anadirActividad($_POST['nuevaActividad'], $idUsu, $_POST['grupoNuevaActividad']);
 
-	    if($res){ 
+	    if($res): 
 				header('Location: ..\views\admActividad.php?res=1');
-	    }
-	    else{
-			    header('Location: ..\views\index.php?ERROR1');
-	    }
+	    else:
+			    header('Location: ..\views\error.php');
+	    endif;
 	}
 	elseif( !empty($_POST['modificarActividad']) ){ // MODIFICAR ACTIVIDAD 	
 		
-		$res =  $q ->modificarActividad($_POST['modificarActividad'], $_POST['idActividad'], $_POST['grupoModificarActividad']);
+		$res =  $a ->modificarActividad($_POST['modificarActividad'], $_POST['idActividad'], $_POST['grupoModificarActividad']);
 		
-	    if($res){ 
-			echo "$_POST[grupoModificarActividad]";
-			
+	    if($res):			
 			    header('Location: ..\views\admActividad.php?res=2');
-	    }
-	    else{
-			    header('Location: ..\views\index.php?ERROR2');
-	    }	
-	
+	    else:
+			    header('Location: ..\views\error.php');
+		endif;
 	}
 	elseif ( !empty($_POST['borraActividad']) ){ 
 
-		$res =  $q ->borrarActividad($_POST['borraActividad']);
+		$res =  $a ->borrarActividad($_POST['borraActividad']);
 		
-	    if($res){ 
-			
+	    if($res): 
 			    header('Location: ..\views\admActividad.php?res=3');
-	    }
-	    else{
-			    header('Location: ..\views\index.php?ERROR3');
-	    }			
-		
+	    else:
+			    header('Location: ..\views\error.php');
+		endif;
 	}
 	else{
-		header('Location: ../index.php?nadaquehacer');
+		header('Location: ..\views\error.php');
 	}
 
  ?>

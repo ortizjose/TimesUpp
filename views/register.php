@@ -150,7 +150,7 @@
 									<div class="captions">Recuerdame</div>
 								</div>
 								<div class="col-xs-10 offset-xs-1">
-									<button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light m-b-20">Siguiente
+									<button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light m-b-20">Registro
 									</button>
 								</div>
 								<div class="row">

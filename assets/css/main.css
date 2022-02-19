@@ -6179,6 +6179,8 @@ svg#sun {
     .color-picker .skin a.actt {
       border: 2px #FFF solid; }
 
+/* Tamaños de Cards */
+
 #video_background { 
   position: absolute; 
   bottom: 0px; 
@@ -6208,14 +6210,7 @@ svg#sun {
 .addCardCrearActividad{
   overflow-y:hidden;
   overflow-x: hidden;
-  height: 350px;
-}
-
-
-.addCardModificarBorrarActividad{
-  overflow-y:auto;
-  overflow-x: hidden;
-  height: 710px;
+  min-height: 260px;
 }
 
 .addCardCrearGrupo{
@@ -6227,15 +6222,92 @@ svg#sun {
 .addCardContactos{
   overflow-y:auto;
   overflow-x: hidden;
-  height: 773px;	
-	
+  height: 790px;		
 }
 
-.addCardContactosPendientes{
+
+.CardS1{
   overflow-y:auto;
   overflow-x: hidden;
-  height: 505px;	
+  min-height: 155px;		
+}
+
+.CardM1{
+  overflow-y:auto;
+  overflow-x: hidden;
+  height: 470px;		
+}
+
+.CardB1{
+  overflow-y:auto;
+  overflow-x: hidden;
+  height: 720px;
+}
+
+
+/* Foto de Perfil*/
+
+.profile-pic{
+	height: 280px;
+	width: 280px;
+	position: relative;
+	margin: auto;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 1px solid #3D505A;
+}
+.p-photo{
+	height: 100%;
+	width: 100%;
 	
+}
+.p-file{
+	position: absolute;
+	botton: 0;
+	outline: none;
+	color: transparent;
+	background: rgba(61,80,90,0.7);
+	width: 100%;
+	height: 40%;
+	transform: translate(-100%,150%);
+	box-sizing: border-box;
+	cursor: pointer;
+	transition: 0.5s;
+	opacity: 0;
+	
+}
+.p-file::-webkit-file-upload-button{
+	visibility: hidden;
+}
+.p-file::before{
+	content: '\f030';
+	font-family: fontAwesome;
+	font-size: 50px;
+	padding: 110px;
+	color: white;
+}
+.p-file::after{
+	content: 'Cambiar Foto';
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bold;
+	color: white;
+	display: block;
+	bottom: 20px;
+	transform: translate(92%,-20%);
+	font-size: 140x;
+	position: absolute;
+}
+.p-file:hover{
+	opacity: 1;
+}
+
+/* End Foto de Perfil*/
+
+.img-contactos{
+	height: 80px;
+	width: 80px;
+	border-radius: 50%;
+	border: 2px solid #3D505A;
 }
 
 

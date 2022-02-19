@@ -67,7 +67,7 @@ class UsuarioDB {
 		
 		// Inserción en BBDD del usuario
 		$contrasena=md5($contrasena);	
-		$peticion="INSERT INTO USUARIO (IdUsu, Usuario, Nombre, Contrasena, Email) VALUES ( NULL, '$usuario', '$nombre', '$contrasena', '$email')";			
+		$peticion="INSERT INTO USUARIO (IdUsu, Usuario, Nombre, Contrasena, Email, Foto) VALUES ( NULL, '$usuario', '$nombre', '$contrasena', '$email', '../assets/avatar/default.png')";			
 		$sentence = $this -> dbc->prepare($peticion);
 
 		if ($sentence->execute()) 
@@ -81,6 +81,44 @@ class UsuarioDB {
 
 	}
 
+
+	
+	public function comprobarLogin($usuario, $contrasena)
+	{
+
+		$peticion="SELECT Nombre FROM USUARIO WHERE Usuario='$usuario'";
+
+		$sentence= $this-> dbc->prepare($peticion);
+		if ($sentence->execute()):
+			$user1=$sentence->fetch();
+		else:
+			return false;
+		endif;
+		
+   	 	if(empty($user1[0])):
+   	 		return -1;
+		endif;
+		
+   	 	$contrasena=md5($contrasena);
+
+   	 	$peticion="SELECT Contrasena FROM USUARIO WHERE Usuario='$usuario'";
+		$sentence= $this-> dbc->prepare($peticion);
+
+		if ($sentence->execute()):
+			$pass=$sentence->fetch();
+		else:	
+			return false;
+		endif;
+		
+   	 	if(strnatcmp ( $pass[0] , $contrasena) == 0): // Sensible mayus/minus
+   	 		return 1;
+		else:
+	   	 	return -2;	
+   	 	endif;
+		
+	}
+	
+	
 
 	public function getIdUsuario($usuario)
 	{
@@ -96,6 +134,7 @@ class UsuarioDB {
 		endif;
 	}		
 
+	
 	public function getUsuario($idUsu)
 	{
 		$usuario = array();
@@ -105,7 +144,66 @@ class UsuarioDB {
 
 		return $usuario;
 	}		
+
+	
+	public function actualizarEmail($idUsu, $antiguoEmail, $nuevoEmail)
+	{
+		$sentence = $this -> dbc->prepare("SELECT IdUsu FROM USUARIO WHERE Email='$antiguoEmail' AND IdUsu='$idUsu'");
+		$sentence->execute();
+		$usuario=$sentence->fetch();
 		
+		if(empty($usuario[0])):
+			return -1;
+		else:
+		
+			$sentence = $this -> dbc->prepare("UPDATE USUARIO SET Email='$nuevoEmail' WHERE IdUsu='$idUsu'");
+
+			if ($sentence->execute()):
+				return 1;
+			else:
+				return 0;
+			endif;
+	
+		endif;			
+	}
+
+	public function actualizarContrasena($idUsu, $antiguaContrasena, $nuevaContrasena)
+	{
+		$antiguaContrasena=md5($antiguaContrasena);
+		$sentence = $this -> dbc->prepare("SELECT IdUsu FROM USUARIO WHERE Contrasena='$antiguaContrasena' AND IdUsu='$idUsu'");
+		$sentence->execute();
+		$usuario=$sentence->fetch();
+		
+		if(empty($usuario[0])):
+			return -1;
+		else:
+		
+			$nuevaContrasena=md5($nuevaContrasena);
+			$sentence = $this -> dbc->prepare("UPDATE USUARIO SET Contrasena='$nuevaContrasena' WHERE IdUsu='$idUsu'");
+
+			if ($sentence->execute()):
+				return 1;
+			else:
+				return 0;
+			endif;
+	
+		endif;		
+	}
+
+	public function actualizarFoto($idUsu, $Destino)
+	{
+
+		$sentence = $this -> dbc->prepare("UPDATE USUARIO SET Foto='$Destino' WHERE IdUsu = $idUsu");
+
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;
+		endif;
+	
+	}
+
+	
 	
 	
 	/* #########################################################################
@@ -120,7 +218,7 @@ class UsuarioDB {
 
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare(" SELECT Nombre, Usuario, IdUsu, Email FROM USUARIO WHERE IdUsu = ANY ( SELECT IdUsu1 FROM CONTACTOS WHERE IdUsu2 = $idUsu AND Pendiente = 0) OR IdUsu = ANY (SELECT IdUsu2 FROM CONTACTOS WHERE IdUsu1 = $idUsu AND Pendiente = 0) ");
+		$sentence = $this -> dbc->prepare(" SELECT * FROM USUARIO WHERE IdUsu = ANY ( SELECT IdUsu1 FROM CONTACTOS WHERE IdUsu2 = $idUsu AND Pendiente = 0) OR IdUsu = ANY (SELECT IdUsu2 FROM CONTACTOS WHERE IdUsu1 = $idUsu AND Pendiente = 0) ");
 
 		if ($sentence->execute()): 
 			while ($row = $sentence->fetch()):

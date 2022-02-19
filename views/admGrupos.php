@@ -1,9 +1,13 @@
 
 <?php
 include '..\controller\sessionBean.php';
-include '..\model\bdConnection.php';
+include '..\model\genericDB.php';
+include '..\model\usuarioDB.php';
+include '..\model\grupoDB.php';
 $s = new SessionBean();
-$q = new LibraryQueries();
+$g = new GenericDB();
+$u = new UsuarioDB();
+$gr = new GrupoDB();
 
   $IdUsu = $s -> getIdActualUsuario();
 
@@ -50,7 +54,7 @@ require '..\views\templates\navbar.html';
                                     <div class="col-sm-10">	
 										<select class="searchable" multiple='multiple' name="integrantesNuevoGrupo[]" required>
 											
-										<?php foreach ($q -> getNombreContactos($IdUsu) as $contacto): ?>
+										<?php foreach ($u -> getContactos($IdUsu) as $contacto): ?>
 											<option value='<?= $contacto['IdUsu'] ?>' > <?=  $contacto['Nombre'] ?> </option>											
 										<?php endforeach; ?>												
 											
@@ -117,7 +121,7 @@ require '..\views\templates\navbar.html';
                          </thead>
                          <tbody>
 							 
-						<?php $i = 0; foreach (($q -> getGruposUsuario($IdUsu)) as $grupo): ?>
+						<?php $i = 0; foreach (($gr -> getGruposUsuario($IdUsu)) as $grupo): ?>
                             
 							<tr>
 								<td> <?= $grupo['Nombre'] ?> </td>
@@ -153,8 +157,8 @@ require '..\views\templates\navbar.html';
 											 <div class="col-sm-6">
 												 <!-- Pequeño problema. Id es único y por lo tanto en js de advance-form.js hay que poner una línea de id.-->
 												<select class="form-control" id="example-multiple-selected<?= $i ?>" name="integrantesModificarGrupo[]" multiple="multiple" required>								   	
-													<?php $j = 0; $integrante = $q -> getIntegrantesGrupo($grupo['IdGrupo'], $IdUsu);
-														  foreach ($q -> getNombreContactos($IdUsu) as $contacto): 
+													<?php $j = 0; $integrante = $gr -> getIntegrantesGrupo($grupo['IdGrupo'], $IdUsu);
+														  foreach ($u -> getContactos($IdUsu) as $contacto): 
 									
 														   if ( $contacto['IdUsu'] != $integrante[$j]['IdUsu'] ): ?>
 													

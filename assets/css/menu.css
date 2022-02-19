@@ -608,7 +608,7 @@ header .dropdown-menu {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   border: 0;
   padding: 0;
-  min-width: 230px; }
+  min-width: 250px;}
 
 .dropdown-menu li a {
   position: relative;
@@ -759,7 +759,7 @@ header .dropdown-menu {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
   .widget-small .icon {
     display: flex;
-    min-width: 85px;
+    min-width: 385px;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -1163,7 +1163,8 @@ header .dropdown-menu {
 
 @media (max-width: 767px) {
   .mega-menu.menu-open .card-block.mega-card {
-    padding: 0; } }
+    padding: 0; } 	
+}
 @media (min-width: 767px) {
   /* Top bar menu */
   .horizontal-fixed .container, .horizontal-fixed .horizontal-fixed .container-fluid {
@@ -1274,10 +1275,21 @@ header .dropdown-menu {
     ul.mega-list li > a > i {
       font-size: 10px; }
   ul.mega-list li a {
-    border-top: none; } }
+    border-top: none; }
+
+	
+
+
+
+}
 @media (max-width: 1199px) {
   .horizontal-fixed.fixed .sidebar-menu > li > a {
-    padding: 10px 5px; } }
+    padding: 10px 5px; }
+}
+
+@media (max-width: 1199px) {
+	
+}
 @media (max-width: 991px) and (min-width: 767px) {
   .horizontal-fixed .main-sidebar .sidebar-menu li span {
     display: none; } }
@@ -1287,8 +1299,37 @@ header .dropdown-menu {
 .slimScrollBar {
   width: 3px !important; }
 
-.upgrade-button {
-  display: inline-block;
-  margin-top: 4px; }
+/* XXX Ajustes XXX */	
+@media (max-width: 767px) {
 
-/*# sourceMappingURL=menu.css.map */
+header .dropdown-menu {
+  right: 0;
+  left: auto;
+  margin-top: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  border: 0;
+  padding: 0;
+  min-width: 160px;}
+
+.dropdown-menu li a {
+  position: relative;
+  padding: 8px 0px; }
+  .dropdown-menu li a i {
+    width: 20px;
+    font-size: 18px;
+    vertical-align: middle; }
+
+.open > .dropdown-menu {
+  -webkit-animation: scaleDrop 0.3s both;
+  -moz-animation: scaleDrop 0.3s both;
+  -ms-animation: scaleDrop 0.3s both;
+  animation: scaleDrop 0.3s both;
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0; }
+	
+.dropdown-user {
+display: none; }
+	
+}

@@ -1,15 +1,13 @@
 <?php 
-include '..\model\bdConnection.php';
 include '..\controller\sessionBean.php';
 include '..\model\usuarioDB.php';	
-	$q = new LibraryQueries();
+
 	$s = new SessionBean();
 	$u = new UsuarioDB();
 
 	$idUsu = $s -> getIdActualUsuario();
 
-
-    if(empty($q->dbc)){
+    if(empty($u ->dbc)){
         echo "<h3 align='center'>¡Error!: No se pudo establecer la conexión con la base de datos.</h3><br/>";
         die();
     }

@@ -13,7 +13,22 @@
 - Comprobado el aceptar/rechazar desde un lado y otro (usando admin y maxi2)
 - Hecha página de Error.
 - Arreglada la mayoria de dudas comentadas con Antonio.
-- Página de mi Perfil
+
+10/02/2022
+- Se ha hecho parte de la pagina de mi perfil: Cambiar Email y Contraseña
+- Se ha añadido una foto de perfil para los usuarios
+
+11/02/2022
+- Se está separando el "bdConnection" en diferentes archivos: genericDB, actividadDB, grupoDB.
+- El menu de usuario y su icono ahora tiene dos tamaños según el tamaño del dispositivo (menu.css)
+
+15/02/2022
+- Se ha añadido el "cerrar sesión" dentro de mi perfil.
+- Se ha hecho una reestructuración de la pagina de admActividad y se está haciendo responsiva. Queda la parte de borrado.
+- Se ha echo manualmente el "Añadir nuevo contacto" en Contactos y hay que ver el tema del botón porque no espacia en la versión movil.
+
+16/02/2022
+- Todos los cambios han sido visuales para la parte de admActividad, contactos y perfil. Ahora es todo responsivo y reutilizando tamaños de card.
 
 
 
@@ -21,13 +36,11 @@
 COSAS PENDIENTES
 
 *GENERICO
-- Separar Actividad del mismo archivo bd
-- Unificar todo el modelo de usuario en el mismo archivo
-- GenericDB para navbar y demas
-- Mostrar el usuario en mavbar para version movil
+- Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones
 
 *ACTIVIDAD
 - Meter en Actividad idGrupo como FK y tirar de idGrupo o idUsu según sea grupal o no
+- El input de selección de grupo hay que revisar que le pasa en el css con un @media de 544px.
 
 
 *CONTACTOS
@@ -40,6 +53,11 @@ COSAS PENDIENTES
 DUDAS
 - Quiero añadir fotos de perfil (con una default). He visto que guardar las fotos en bbdd puede ralentizar mucho el proceso de consulta y que es mejor en local y lo que se guarda en en la base de datos es la ruta ¿Que os parece?¿Algo a mejorar? 
 - Nombre de contacto mirar tamaño en pixeles ( Ahora mismo style="max-width:50%")
+
+- No hay distincion en minus/mayus a la hora de comprobar usuarios/correos en inicio de sesión, cambio de Correo, etc.
+- Botones circulares o cuadrados?
+- Control de sesion por tiempo ahora mismo esta quitado, pero en el momento que lo pongamos otra vez ¿Tiempo ilimitado a la hora de que seleccionemos el "Recuerdame" del login?
+
 
 
 DUDAS RESUELTAS

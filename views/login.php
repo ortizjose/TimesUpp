@@ -5,7 +5,7 @@ $s = new SessionBean();
 // Si se quiere volver al login se tendrá que Cerrar Sesión. El closeSession lo podria poner como else de es
 
     if ( isset($_SESSION['Usuario'])){
-		echo "| Usuario : {$_SESSION['Usuario']} | Id :{$_SESSION['Id']}";
+		echo "| Usuario : {$_SESSION['Usuario']} | Id :{$_SESSION['Id']} | Foto:{$_SESSION['Foto']}";
     	//header('Location: index.php');  
 	}
 	
@@ -15,13 +15,6 @@ $s = new SessionBean();
 <html lang="es">
 <head>
 	<title>Iniciar Sesión - TimesUpp</title>
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
 
 	<!-- Meta -->
 	<meta charset="utf-8">
@@ -84,18 +77,32 @@ $s = new SessionBean();
 						<h3 class="text-center txt-primary">
 							Iniciar sesión en su cuenta
 						</h3>
+						
+						<div class="text-center">
+							<br />	
+						
+						<?php if( !empty($_GET['login'])):
+							switch ($_GET['login']):
+							case -1:?>  
 
-						<?php if( !empty($_GET['login']) && $_GET['login'] == 'error'): ?>
-
-							<div class="text-center">
-								<br />	
 								<h6 class="text-center text-danger">
 									No se ha encontrado ninguna cuenta con este usuario. Vuelve a intentarlo.
 								</h6>
-								<br />
-							</div>
-
-						<?php endif; ?>
+							
+						<?php break;
+							case -2:?>
+							
+								<h6 class="text-center text-warning">
+									La contraseña que has introducido es incorrecta.
+								</h6>
+							
+						<?php break;
+							endswitch;
+							endif; ?>
+							
+							<br />
+						</div>
+							
 
 						<div class="row">
 							<div class="col-md-12">

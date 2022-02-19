@@ -3161,7 +3161,7 @@ tbody.collapse.show {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50;
   z-index: 1000;
   display: none;
   float: left;
@@ -3183,7 +3183,7 @@ tbody.collapse.show {
   height: 1px;
   margin: 0.5rem 0;
   overflow: hidden;
-  background-color: #eceeef;
+  background-color: #11111;
 }
 
 .dropdown-item {
