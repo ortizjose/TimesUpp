@@ -11,7 +11,8 @@ $a = new ActividadDB();
         die();
     }
 
-    if ( !empty($_POST['nuevaActividad']) ){ 		// NUEVA ACTIVIDAD
+// NUEVA ACTIVIDAD
+    if ( !empty($_POST['nuevaActividad']) ){ 		
 
 	    $res = $a ->anadirActividad($_POST['nuevaActividad'], $idUsu, $_POST['grupoNuevaActividad']);
 
@@ -21,9 +22,11 @@ $a = new ActividadDB();
 			    header('Location: ..\views\error.php');
 	    endif;
 	}
-	elseif( !empty($_POST['modificarActividad']) ){ // MODIFICAR ACTIVIDAD 	
+
+// MODIFICAR ACTIVIDAD 
+	elseif( !empty($_POST['modificarActividad']) ){ 	
 		
-		$res =  $a ->modificarActividad($_POST['modificarActividad'], $_POST['idActividad'], $_POST['grupoModificarActividad']);
+		$res =  $a ->modificarActividad($_POST['modificarActividad'], $_POST['idActividad'], $_POST['grupoModificarActividad'], $idUsu);
 		
 	    if($res):			
 			    header('Location: ..\views\admActividad.php?res=2');
@@ -31,6 +34,8 @@ $a = new ActividadDB();
 			    header('Location: ..\views\error.php');
 		endif;
 	}
+
+// BORRAR ACTIVIDAD
 	elseif ( !empty($_POST['borraActividad']) ){ 
 
 		$res =  $a ->borrarActividad($_POST['borraActividad']);
@@ -41,6 +46,8 @@ $a = new ActividadDB();
 			    header('Location: ..\views\error.php');
 		endif;
 	}
+
+// ERROR
 	else{
 		header('Location: ..\views\error.php');
 	}

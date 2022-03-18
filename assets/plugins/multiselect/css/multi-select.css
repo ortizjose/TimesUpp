@@ -1,11 +1,6 @@
 .ms-container{
   background: transparent url('../img/switch.png') no-repeat 50% 50%;
-  width: 640px; /* 370px por defecto*/
-}
-
-.ms-container2{
-  background: transparent url('../img/switch.png') no-repeat 50% 50%;
-  width: 240px; /* 370px por defecto*/
+  width: 100%;
 }
 
 .ms-container:after{
@@ -87,7 +82,7 @@
   cursor: pointer;
   color: #fff;
   text-decoration: none;
-  background-color: #08c;
+  background-color: #3D505A; /* Default #08c*/
 }
 
 .ms-container .ms-selectable li.disabled,

@@ -14,6 +14,9 @@ $gr = new GrupoDB();
     if ( !isset($_SESSION['Usuario'])){
     	header('Location: ..\views\login.php');  
 	}
+	
+  $grupos = $gr -> getGruposUsuario($IdUsu);
+  $contactos = $u -> getContactos($IdUsu);
 
 require '..\views\templates\header2.html';
 require '..\views\templates\navbar.html';
@@ -34,103 +37,51 @@ require '..\views\templates\navbar.html';
             <!-- 2-1 block start -->
             <div class="row">
 
-               <div class="col-lg-6">
-                  <div class="card">
-                    <div class="addCardCrearGrupo">
-                      <div class="card-header">
-                        <h5 class="card-header-text">Crear Grupo</h5>
-                      </div>
-                        <div class="card-block">
-                           <form action="../controller/admGruposController.php" method="post">
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">Nombre</label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="nuevoGrupo" placeholder="Nombre del grupo" required>
-                                 </div>
-                              </div>
-								<!-- Si se quiere cambiar algo de select ir a assets/pages/advance-form.js o a assets/plugins/multiselect/css/multi-select.css-->
-                              <div class="form-group row">
-                                 <label  class="col-xs-2 col-form-label form-control-label">Integrantes</label>
-                                    <div class="col-sm-10">	
-										<select class="searchable" multiple='multiple' name="integrantesNuevoGrupo[]" required>
-											
-										<?php foreach ($u -> getContactos($IdUsu) as $contacto): ?>
-											<option value='<?= $contacto['IdUsu'] ?>' > <?=  $contacto['Nombre'] ?> </option>											
-										<?php endforeach; ?>												
-											
-										</select>
-
-                                    </div>
-                              </div>
-
-							   
-                              <div class="form-group row">
-							  
-							  <?php if( !empty($_GET['res']) && $_GET['res'] == 1):?>
-
-								<div class="col-xs-4 offset-xs-6 col-form-label form-control-label">                    
-								  <label class="text-success"> Actividad creada correctamente.
-								  </label>
-								</div>
-
-								<div class="col-xs-2 offset-xs-0">                                  
-								  <button type="submit" name="submitted" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Crear</button>
-								</div>
-							
-                    		  <?php else: ?>
-								  
-                                <div class="col-xs-2 offset-xs-10">
-                                  <button type="submit" name="submitted" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Crear</button>
-                                </div>
-							<?php endif; ?>
-
-                              </div>							  
-							   
-							   
-                           </form>
-                          </div>
-
-                    </div>
-
-
-
-
-
-                            <div id="card3" style="min-height: 0px; margin: 0 auto"></div>
-                  </div>
-                </div>
-
-
-
- 
-               <div class="col-xl-6">
+               <div class="col-xl-7">
                   <div class="card">
                      <div class="card-header">
                         <h5 class="card-header-text">Borrar/Modificar Grupo</h5>
                      </div>
 						
-                      <div class="addCardModificarBorrarActividad">
+                      <div class="CardB1">
                         <div class="card-block">
+						
+						<?php if (empty($grupos)): ?>
+							
+						 <div id="blank" style="min-height: 50px; margin: 0 auto"></div>
+						 <div style="text-align: center;">
+						  <span style="font-size: 200px; color: #3D505A;" ><i class="icofont icofont-space-shuttle "></i></span>
+						  <h3> Si quieres construir una nave espacial necesitarás ayuda. Crea grupos para compartir actividades y así repartir las tareas ¿A que esperas?</h3>	
+						 </div>
+	
+						<?php else: ?>
+							
                         <table class="table table-hover" >
                          <thead>
                             <tr>
-                               <th>Actividad</th>
+                               <th>Grupo</th>
                                <th>Modificar</th>
+							   <th>Salir</th>
                                <th>Borrar</th>
                             </tr>
                          </thead>
                          <tbody>
 							 
-						<?php $i = 0; foreach (($gr -> getGruposUsuario($IdUsu)) as $grupo): ?>
+						<?php $i = 0;
+							 	foreach ($grupos as $grupo): ?>
                             
 							<tr>
 								<td> <?= $grupo['Nombre'] ?> </td>
 
-								<td> <button class="btn btn-info waves-effect" data-toggle="collapse" data-target="#collapseOne_<?= $i ?>" aria-expanded="true" aria-controls="collapseOne">
+								<td> <button class="offset-xs-1 btn btn-info btn-icon waves-effect" data-toggle="collapse" data-target="#collapseOne_<?= $i ?>" aria-expanded="true" aria-controls="collapseOne">
 									 <i class="icon-note"></i></button>
-								</td>	
-
-								<td> <button class="btn btn-danger waves-effect" data-toggle="collapse" data-target="#collapseTwo_<?= $i ?>" aria-expanded="true">
+								</td>
+								
+								<td> <button class="btn btn-danger btn-icon waves-effect" data-toggle="collapse" data-target="#collapseTwo_<?= $i ?>" aria-expanded="true">
+									 <i class="icon-share-alt icon-white"></i></a>
+								</td>
+								
+								<td> <button class="btn btn-danger btn-icon waves-effect" data-toggle="collapse" data-target="#collapseThree_<?= $i ?>" aria-expanded="true">
 									 <i class="icon-trash icon-white"></i></a>
 								</td>
 								
@@ -138,61 +89,90 @@ require '..\views\templates\navbar.html';
 							</tr>
 							 
 							<tr>
-								<td colspan=3>
+								<td colspan=4>
 									
 									<!-- Collapse con la Actividad a Modificar -->
 									<div id="collapseOne_<?= $i ?>" class="collapse show"  >
 										
 										<form action="../controller/admGruposController.php" method="post">
+											
 										  <div class="form-group row">
-											 <label for="example-text-input" class="col-xs-3 col-form-label form-control-label">Nuevo Nombre</label>
-											 <div class="col-sm-6">
+											 <label for="example-text-input" class="col-md-3 col-form-label form-control-label">Nuevo Nombre</label>
+											 <div class="col-md-7">
 												<input class="form-control" type="text" name="modificarGrupo" placeholder="<?= $grupo['Nombre'] ?>" value="<?= $grupo['Nombre'] ?>" >
 											 </div>
 											  
 										  </div>
 											  
 										  <div class="form-group row">
-											 <label for="example-text-input" class="col-xs-3 col-form-label form-control-label">Modificar Integrantes</label>
-											 <div class="col-sm-6">
-												 <!-- Pequeño problema. Id es único y por lo tanto en js de advance-form.js hay que poner una línea de id.-->
-												<select class="form-control" id="example-multiple-selected<?= $i ?>" name="integrantesModificarGrupo[]" multiple="multiple" required>								   	
-													<?php $j = 0; $integrante = $gr -> getIntegrantesGrupo($grupo['IdGrupo'], $IdUsu);
-														  foreach ($u -> getContactos($IdUsu) as $contacto): 
-									
-														   if ( $contacto['IdUsu'] != $integrante[$j]['IdUsu'] ): ?>
-													
-																<option value="<?= $contacto['IdUsu'] ?>"> <?= $contacto['Nombre'] ?></option>
-													
-													 <?php else: ?>	
-													
-																<option id ="op_<?= $i ?>" value="<?= $contacto['IdUsu'] ?>" selected> <?= $contacto['Nombre'] ?> </option>		
-													
-													<?php  $j++; 
-														  endif; endforeach; ?>
-													
+										   <label for="example-text-input" class="col-md-3 col-xs-4 col-form-label form-control-label">Modificar Integrantes</label>
+										   <div class="col-md-7 col-xs-8">
+											 	<!-- Pequeño problema. Id es único y por lo tanto en js de advance-form.js hay que poner una línea de id. CSS en boostrap-multiselect.css-->
+												<select class="form-control " id="example-multiple-selected<?= $i ?>" name="integrantesModificarGrupo[]" multiple="multiple" required>                   
+												  <?php foreach ($gr -> getIntegrantesContactos($grupo['IdGrupo'], $IdUsu) as $integrante): 
+												   if ( $integrante['IdGrupo'] == $grupo['IdGrupo'] ):?>
+
+													<option value="<?= $integrante['IdUsu'] ?>" selected> <?= $integrante['Nombre'] ?></option>
+												  <?php else: ?>
+
+													<option value="<?= $integrante['IdUsu'] ?>"> <?= $integrante['Nombre'] ?></option>  
+
+												  <?php endif; endforeach; ?>
+
+
 												</select>
-											 </div>
-											 
-											 <button type="submit" class="btn btn-success waves-effect waves-light" name="idGrupo" value="<?= $grupo['IdGrupo'] ?>">Aplicar</button>
+										   </div>
 										  </div>
+											
+											 <div class="row">
+												<div class="col-md-10 text-right"> 											 
+											 		<button type="submit" class="btn btn-success waves-effect waves-light" name="idGrupo" value="<?= $grupo['IdGrupo'] ?>">Aplicar</button>
+												</div>
+											</div>
+										  
+											
 										</form>								   
 	   
 									</div>
-								   
+
 							   		<!-- Collapse con la Actividad a Eliminar -->								
-									<div id="collapseTwo_<?= $i ?>" class="collapse show"  >
+									<div id="collapseTwo_<?= $i ?>" class="collapse show">
 										
+										</br>
 										<form action="../controller/admGruposController.php" method="post">
 										  <div class="form-group row">
-											 <label for="example-text-input" class="col-xs-6 col-form-label form-control-label">¿Eliminar el grupo " <?= $grupo['Nombre'] ?> " ?</label>
+											 <label for="example-text-input" class="col-md-6 col-form-label form-control-label">¿Desea salir del grupo " <?= $grupo['Nombre'] ?> " ?</label>
 											  
-											 <div class="checkbox-color checkbox-danger">
-											  <input id="checkbox_<?= $i ?>" type="checkbox" required="required" name="borraGrupo" value="<?= $grupo['IdGrupo'] ?>">
-												  <label for="checkbox_<?= $i ?>" class="form-control-label text-danger">Confirmar</label>
-											 </div>
+											 <div class="col-md-4 text-right"> 
+												 <div class="checkbox-color checkbox-danger">
+												  	<input id="checkbox_<?= $i ?>" type="checkbox" required="required" name="salirGrupo" value="<?= $grupo['IdGrupo'] ?>">
+													  <label for="checkbox_<?= $i ?>" class="form-control-label text-danger">Confirmar</label>
+												 </div>
 
-											 <button type="submit" class="btn btn-danger waves-effect waves-light">Eliminar</button>
+												 <button type="submit" class="btn btn-danger waves-effect waves-light">Salir</button>
+											 </div>
+										  </div>
+										</form>	
+
+									</div>									
+									
+									
+							   		<!-- Collapse con la Actividad a Eliminar -->								
+									<div id="collapseThree_<?= $i ?>" class="collapse show"  >
+										
+										</br>
+										<form action="../controller/admGruposController.php" method="post">
+										  <div class="form-group row">
+											 <label for="example-text-input" class="col-md-6 col-form-label form-control-label">¿Eliminar el grupo " <?= $grupo['Nombre'] ?> " ?</label>
+											  
+											 <div class="col-md-4 text-right">  
+												 <div class="checkbox-color checkbox-danger">
+												  	<input id="checkbox2_<?= $i ?>" type="checkbox" required="required" name="borraGrupo" value="<?= $grupo['IdGrupo'] ?>">
+													  <label for="checkbox2_<?= $i ?>" class="form-control-label text-danger">Confirmar</label>
+												 </div>
+											 
+											 	<button type="submit" class="btn btn-danger waves-effect waves-light">Eliminar</button>
+										     </div>
 										  </div>
 										</form>	
 
@@ -201,7 +181,8 @@ require '..\views\templates\navbar.html';
 								</td>
 							 </tr>
 						 
-						<?php $i++; endforeach; ?>
+						<?php $i++; endforeach;
+					  		endif;?>
 
                          </tbody>
                         </table>
@@ -209,8 +190,82 @@ require '..\views\templates\navbar.html';
                       </div>
                      </div>
                     </div>
-                </div>
+                </div>				
+				
+				
+				
+				
+               <div class="col-lg-5">
+                  <div class="card">
+                    <div class="addCardCrearGrupo">
+                      <div class="card-header">
+                        <h5 class="card-header-text">Crear Grupo</h5>
+                      </div>
+						
+                        <div class="card-block">
+						
+						<?php if(empty($contactos)):?>
+							
+						   <div style="text-align: center;">
+							 <span style="font-size: 100px; color: #3D505A;" ><i class="icofont icofont-users-social "></i></span>
+							 <h3>Sin contactos no tenemos usuarios para poder crear un grupo. Añade contactos para poder a empezar a crear grupos.</h3>			
+						   </div>
+						   </br>
+						   <div class="col-md-12 text-center">
+							  <form action="../views/contactos.php">
+								<button class="btn btn-info waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para ir a al apartado de crear/administrar actividades" type="submit"> 
+								Añadir Contactos
+								</button>
+							  </form>	
+						   </div>
+						<?php else:?>	
+							
+                        	<form action="../controller/admGruposController.php" method="post">
+							   
+                              <div class="form-group row">
+                                 <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nombre</label>
+                                 <div class="col-md-10">
+                                    <input class="form-control" type="text" name="nuevoGrupo" placeholder="Nombre del grupo" required>
+                                 </div>
+                              </div>
+								<!-- Si se quiere cambiar algo de select ir a assets/pages/advance-form.js o a assets/plugins/multiselect/css/multi-select.css-->
+                              <div class="row form-group">
+							  	<label  class="col-md-2 col-form-label form-control-label">Integrantes</label>
+								<div class="col-md-10">
+									<select class="searchable" multiple='multiple' name="integrantesNuevoGrupo[]" required>
+										
+									<?php foreach ($contactos as $contacto): ?>
+									  <option value='<?= $contacto['IdUsu'] ?>' > <?=  $contacto['Nombre'] ?> </option>                     
+									<?php endforeach; ?>   
+										
+									</select>
+								</div>
+							  </div>
+							   
+                              <div class="row">
+								 <div class="col-md-6 col-xs-6 col-form-label form-control-label"> 
+									 
+								  <?php if( !empty($_GET['res']) && $_GET['res'] == 1):?>
+								 	<label class="text-success" > Grupo creado correctamente.</label>
+								  <?php endif; ?>
+									 
+								 </div>
+                                 <div class="col-md-6 col-xs-6 text-right" >
+                                    <button type="submit" class="btn btn-info btn-md waves-effect waves-light">Crear</button>
+								 </div>
+                              </div>						  
+							   
+							   
+                            </form>
+						
+						<?php endif;?>
+						
+                        </div>
 
+                    </div>
+
+                  </div>
+                </div>
 
                </div>
 

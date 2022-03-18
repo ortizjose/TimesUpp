@@ -30,6 +30,16 @@ class GrupoDB {
 		return $dbc;
 	}
 
+	public function getNombreGrupo($idGrupo)
+	{
+		$grupo = array();
+		$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO WHERE IdGrupo='$idGrupo'");
+		$sentence->execute();
+		$grupo[0]=$sentence->fetch();	
+
+		return $grupo;	
+	}
+
 	
 	public function getGruposUsuario($idUsu)
 	{
@@ -37,7 +47,7 @@ class GrupoDB {
 		$grupos = array();
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO WHERE IdUsu = $idUsu ORDER BY idGrupo");
+		$sentence = $this -> dbc->prepare("SELECT grupo.Nombre, grupo.IdGrupo FROM GRUPO INNER JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE usuariogrupo.IdUsu = '$idUsu'");
 
 		if ($sentence->execute()):
 			while ($row = $sentence->fetch()):
@@ -53,14 +63,19 @@ class GrupoDB {
 
 	
 	
-	public function getIntegrantesGrupo($idGrupo, $idUsu)
+	public function getIntegrantesContactos($idGrupo, $idUsu)
 	{
 
 		$integrantes = array();
 
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare("SELECT Nombre, IdUsu FROM USUARIO WHERE IdUsu IN (SELECT IdUsu FROM GRUPO WHERE IdGrupo = '$idGrupo') AND IdUsu != '$idUsu' ");
+		$sentence = $this -> dbc->prepare("SELECT CONTACTOS.Nombre, CONTACTOS.IdUsu, CONTACTOS.IdGrupo FROM (
+												SELECT U.Nombre, U.IdUsu, G.IdGrupo FROM USUARIO U
+												LEFT JOIN usuariogrupo G ON G.IdUsu = U.IdUsu 
+												WHERE (U.IdUsu = ANY ( SELECT IdUsu1 FROM CONTACTOS WHERE IdUsu2 = '$idUsu' AND Pendiente = 0) OR U.IdUsu = ANY (SELECT IdUsu2 FROM CONTACTOS WHERE IdUsu1 = '$idUsu' AND Pendiente = 0))
+												ORDER BY G.IdGrupo = '$idGrupo' DESC LIMIT 1000
+											) AS CONTACTOS GROUP BY CONTACTOS.IdUsu");
 
 		if ($sentence->execute()):
 			while ($row = $sentence->fetch()):
@@ -73,57 +88,101 @@ class GrupoDB {
 
 		return $integrantes;
 	}	
-
 	
-
-	public function anadirGrupo($nombre, $idUsu, $idGrupo)
+	
+	public function getIntegrantesGrupo($idGrupo)
 	{
-		$return = 0;
-		
-		if (empty($idGrupo) ):
-		
-			$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO GROUP BY IdGrupo ORDER BY IdGrupo DESC LIMIT 0,1");
+		$integrantes = array();
+		$i = 0;
 
-			$sentence->execute();
-			$grupo=$sentence->fetch();
+		$sentence = $this -> dbc->prepare("SELECT U.IdUsu, U.Nombre FROM USUARIO U 
+											JOIN USUARIOGRUPO G ON U.IdUsu = G.IdUsu 
+											WHERE G.IdGrupo = '$idGrupo'");
 
-			$idGrupo = $grupo['IdGrupo'] + 1;
-			$return = 1;
+		if ($sentence->execute()):
+			while ($row = $sentence->fetch()):
+				
+				$integrantes[$i] = $row;
+				$i++;
 		
+			endwhile;
 		endif;
-		
-			$sentence = $this -> dbc->prepare("INSERT INTO GRUPO(Id, IdGrupo, Nombre, IdUsu) VALUES (NULL,'$idGrupo','$nombre','$idUsu')");
 
-			if ($sentence->execute()):
+		return $integrantes;	
+
+	}
+
+	public function anadirGrupo($nombre, $integrantes)
+	{
+
+		$sentence = $this -> dbc->prepare("INSERT INTO GRUPO(IdGrupo, Nombre, Foto) VALUES (NULL,'$nombre','../assets/groups/default.png'); 
+											SELECT @@IDENTITY AS IdGrupo;");
 		
-				// En el caso de ser la primera vez que se llama a esta funcion de añadir Grupo, nos devolverá el $idGrupo para que no tenga que volver a hacer dos consultas a BBDD.
-				if ($return == 1):
-					return $idGrupo;
+		if($sentence->execute()):
+		
+			$sentence = $this -> dbc->prepare("SELECT @@IDENTITY AS IdGrupo;");
+			$sentence->execute();
+			$idGrupo=$sentence->fetch();
+		
+			foreach ($integrantes as $integrante):
+		
+				$sentence = $this -> dbc->prepare("INSERT INTO USUARIOGRUPO(IdGrupo, IdUsu) VALUES ('$idGrupo[0]','$integrante')");
+				if(!$sentence->execute()):
+					return false;
 				endif;
+					
+			endforeach;
 		
-				return true;
-			else:
-				return false;	
-			endif;
-		
-
+			return true;
+		else:
+			return false;	
+		endif;
+	
 	}	
 
-
 	
-	public function borrarGrupo($idGrupo)
+	public function salirGrupo($idGrupo, $idUsu)
 	{
-		$sentence = $this -> dbc->prepare("DELETE FROM GRUPO WHERE IdGrupo = $idGrupo;");
+		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo = $idGrupo AND IdUsu = '$idUsu'");
 
 		if ($sentence->execute()):
 			return true;
 		else:
 			return false;
 		endif;
+		
+	}		
+	
+
+	
+	public function borrarGrupo($idGrupo)
+	{
+		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo = $idGrupo;");
+
+		if ($sentence->execute()):		
+			$sentence = $this -> dbc->prepare("DELETE FROM GRUPO WHERE IdGrupo = $idGrupo;");
+
+			if ($sentence->execute()):
+				return true;
+			else:
+				return false;
+			endif;
+		endif;
 
 	}		
 	
+	public function actualizarFotoGrupo($idGrupo, $Destino)
+	{
+
+		$sentence = $this -> dbc->prepare("UPDATE GRUPO SET Foto='$Destino' WHERE IdGrupo = $idGrupo");
+
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;
+		endif;
 	
+	}	
 	
 	
 }

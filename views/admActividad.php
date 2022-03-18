@@ -5,8 +5,8 @@ include '..\model\grupoDB.php';
 include '..\model\actividadDB.php';
 $s = new SessionBean();
 $g = new genericDB();
-$gr = new GrupoDB;
-$a = new ActividadDB;
+$gr = new GrupoDB();
+$a = new ActividadDB();
 
 	$IdUsu = $s -> getIdActualUsuario();
 
@@ -73,7 +73,7 @@ require '..\views\templates\navbar.html';
 								</td>	
 
 								<td> <button class="btn btn-danger btn-icon waves-effect" data-toggle="collapse" data-target="#collapseTwo_<?= $i ?>" aria-expanded="true">
-									 <i class="icon-trash icon-white"></i></a>
+									 <i class="icon-trash icon-white"></i></button>
 								</td>
 								
 

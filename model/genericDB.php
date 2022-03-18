@@ -56,7 +56,7 @@ class GenericDB {
 		$actividades = array();
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare("SELECT * FROM ACTIVIDAD WHERE IdUsu = $idUsu ");
+		$sentence = $this -> dbc->prepare("SELECT actividad.IdAct, actividad.Nombre FROM ACTIVIDAD LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo LEFT JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE actividad.IdUsu = '$idUsu' OR usuariogrupo.IdUsu = '$idUsu'");
 
 		if ($sentence->execute()):
 			while ($row = $sentence->fetch()):
@@ -82,7 +82,7 @@ class GenericDB {
 		$grupos = array();
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO WHERE IdUsu = $idUsu ORDER BY idGrupo");
+		$sentence = $this -> dbc->prepare("SELECT grupo.Nombre, grupo.IdGrupo FROM GRUPO INNER JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE usuariogrupo.IdUsu = '$idUsu'");
 
 		if ($sentence->execute()):
 			while ($row = $sentence->fetch()):

@@ -49,7 +49,25 @@ require '..\views\templates\navbar.html';
 									<!--<label for="file" id="uploadButton">Cambiar Foto</label>-->
 								</div>
 							</form>
-							 							 
+							 
+							<div class="col-form-label form-control-label text-center"> 
+								
+							  <?php if (!empty($_GET['foto'])):
+								 switch ($_GET['foto']):
+								 case -1:?>
+
+								  <a class="text-danger "> El archivo añadido no tiene extensión de imagen (.jpg .jpeg .png)</a>
+
+							  <?php break;
+								 case -2: ?>
+								                   
+								  <a class="text-danger"> La fotografía añadida supera los 5mb. Introduzca otra menos pesada.</a>
+								
+							  <?php break;
+								 endswitch; endif;?>	
+								
+							</div>	
+							 
 							<div class="card-block row box-list text-center">
 								<!-- Start a Box p-20 -->
 								<div class="col-lg-4">
@@ -82,7 +100,7 @@ require '..\views\templates\navbar.html';
 										<p class="text-sm-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 									</div>
 								</div>
-							</div>
+							</div>	 
                       </div>
                   	</div>
 					  

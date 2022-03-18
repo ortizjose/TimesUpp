@@ -34,7 +34,7 @@ body {
   font-size: 15px;
   overflow-x: hidden;
   background-color: #E5E5E5;
-  font-family: 'Ubuntu', sans-serif; }
+  font-family: 'Ubuntu' !important; }
 
 * a {
   color: #00b9f5;
@@ -6194,12 +6194,6 @@ svg#sun {
   opacity: 0.5;
 }
 
-.addScrollActividades{
-  overflow-y:auto;
-  overflow-x: hidden;
-  height: 228px;
-}
-
 
 .addCardTareas{
   overflow-y:hidden;
@@ -6216,8 +6210,9 @@ svg#sun {
 .addCardCrearGrupo{
   overflow-y:hidden;
   overflow-x: hidden;
-  height: 500px;
+  min-height: 100px;
 }
+
 
 .addCardContactos{
   overflow-y:auto;
@@ -6225,17 +6220,37 @@ svg#sun {
   height: 790px;		
 }
 
+.CardVS1{
+  overflow-y:auto;
+  overflow-x: hidden;
+  min-height: 100px;
+  max-height: 720px;	
+}
 
 .CardS1{
   overflow-y:auto;
   overflow-x: hidden;
-  min-height: 155px;		
+  min-height: 155px;
+  max-height: 720px;	
 }
+
+.CardS2{
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 170px;	
+}
+
 
 .CardM1{
   overflow-y:auto;
   overflow-x: hidden;
   height: 470px;		
+}
+
+.CardM2-responsive{
+  overflow-y:auto;
+  overflow-x: hidden;
+  min-height: 450px;		
 }
 
 .CardB1{
@@ -6244,6 +6259,11 @@ svg#sun {
   height: 720px;
 }
 
+.CardB1-responisve{
+  overflow-y:auto;
+  overflow-x: hidden;
+  min-height: 720px;
+}
 
 /* Foto de Perfil*/
 
@@ -6293,8 +6313,8 @@ svg#sun {
 	color: white;
 	display: block;
 	bottom: 20px;
-	transform: translate(92%,-20%);
-	font-size: 140x;
+	transform: translate(105%,-20%);
+	font-size: 14px;
 	position: absolute;
 }
 .p-file:hover{

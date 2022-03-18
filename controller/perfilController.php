@@ -66,7 +66,7 @@ $u = new UsuarioDB();
 		
 		if (!in_array($fotoActualExt, $allowed)):
 			header('Location: ..\views\perfil.php?foto=-1');
-		elseif( $fotoSize > 8000000 ): // Maximo permitido son 8 mb
+		elseif( $fotoSize > 5000000 ): // Maximo permitido son 8 mb
 			header('Location: ..\views\perfil.php?foto=-2');
 		else: 
 			//Se mueve al directorio de Avatares
@@ -90,8 +90,8 @@ $u = new UsuarioDB();
 }
 // ERROR
 	else{
-		echo "Nada";
-		//header('Location: ..\views\error.php');
+		
+		header('Location: ..\views\error.php');
 		
 	}
 

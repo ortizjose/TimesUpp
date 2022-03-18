@@ -21,9 +21,7 @@ $(document).ready(function() {
     });
 
     // Tagging Suppoort
-    $(".js-example-tags").select2({
-        tags: true
-    });
+
 
     // Automatic tokenization
     $(".js-example-tokenizer").select2({
@@ -215,13 +213,25 @@ $(document).ready(function() {
     $('#example-single').multiselect();
 
     // Multi Select
-    $('#example-multiple-selected0').multiselect();
+    $('#example-multiple-selected0').multiselect({
+		buttonWidth: '100%'
+	});
     $('#example-multiple-selected1').multiselect();
     $('#example-multiple-selected2').multiselect();
 	$('#example-multiple-selected3').multiselect();
 	$('#example-multiple-selected4').multiselect();
 	$('#example-multiple-selected5').multiselect();
-	//$('.example-multiple-selected').multiselect();
+	$('#example-multiple-selected6').multiselect();
+	$('#example-multiple-selected7').multiselect();
+	$('#example-multiple-selected8').multiselect();
+	$('#example-multiple-selected9').multiselect();	
+	$('#example-multiple-selected10').multiselect();
+	
+	// NO VALE 
+	//document.getElementsByClassName('multiple-selected-row').multiselect();
+	//$('.multiple-selected-row').multiselect();
+	
+
 	
     // Multi Group Select
     $('#example-multiple-optgroups').multiselect();
@@ -434,7 +444,7 @@ $(document).ready(function() {
 
     //Date and time picker
     $(document).ready(function() {
-        $('#date').bootstrapMaterialDatePicker({
+        $('.date').bootstrapMaterialDatePicker({
             time: false,
             clearButton: true
         });

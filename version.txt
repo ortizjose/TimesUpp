@@ -30,7 +30,44 @@
 16/02/2022
 - Todos los cambios han sido visuales para la parte de admActividad, contactos y perfil. Ahora es todo responsivo y reutilizando tamaños de card.
 
+17/02/2022 y 19/02/2022
+- Se ha hecho el formulario de cambiar la foto de perfil dentro del apartado de mi perfil
 
+20/02/2022
+- Cambiar grupo en dos tablas.
+
+22/02/2022
+- Modificar el código de grupos y relacionado, es decir, admActividades y admGrupos.
+- Solo podemos ver los gestionar integrantes de un grupo que son nuestros contactos o añadir a nuestros propios contactos a un grupo.
+- Formulario de crea unificado.
+
+23/02/2022
+- Añadida la opción de Salir de un grupo.
+- Rehecha la opción de Borrar grupo.
+- Hecho responsivo el tema añadir integrantes a la hora de crear grupo.
+- Peleas con modificar integrantes y el select multiple para que sea responsivo. Se han estado viendo opciones de meter class="selectpicker" de boostrap que en nuestra version 4.0 parece que no está: https://developer.snapappointments.com/bootstrap-select/examples/#selected-text-format
+
+09/03/2022
+- Se han añadido los mensajes de error del formulario de foto en perfil.php
+- Se ha creado la página de grupos.php para visualizar información.
+
+10/03/2022
+- Se ha añadido mensaje de empty en actividades de grupo.
+- Se ha añadido mensaje de empty en admGrupos en crear grupo cuando no se tengan contactos.
+- Se ha añadido el mensaje de empty en admGrupos si no hay grupos que mostrar.
+- Se ha añadido el calendario al dashboard en un index de prueba.
+
+14/03/2022
+- Cambios visuales al calendario y primeras pruebas de eventos a mano (Eventos repetidos varios dias, diferentes eventos mismo dia, etc).
+- Se pasa el calendario a index pero de manera muy guarra.
+- Se configura la base de datos con la nueva tabla de EVENTOS.
+- Se hacen las primeras pruebas en el calendario mostrando eventos de BBDD.
+
+17/03/2022
+- Se ha añadido formulario de cración de eventos.
+- Se ha añadido js relacionado con el formulario de cración de eventos. Necesito ayuda JESUS NIZA.
+- Funcionalidad de creación hecha.
+- Push a git.
 
 /////////////////////////////////////////////////////////////////////////////
 COSAS PENDIENTES
@@ -42,20 +79,28 @@ COSAS PENDIENTES
 - Meter en Actividad idGrupo como FK y tirar de idGrupo o idUsu según sea grupal o no
 - El input de selección de grupo hay que revisar que le pasa en el css con un @media de 544px.
 
+*GRUPOS
+- Revisar la adaptación del selectable multiple de crear grupo.
+- Revisar el selectable de modificar grupo para que a partir de dos personas cuente en vez de mostrar, o se adapte.
+- Unificar el footer2 a footer
+- Integrantes del crear no se muestra correctamente con varias pestañas
+- Al pulsar crear actividad se le puede pasar por post una variable para que se seleccione directamente el grupo en el "crear actividad".
 
 *CONTACTOS
-- Cuando no hay contactos poner un caso default como en Peticiones pendientes
 
 
+*PERFIL
+- Añadir mensaje de control para la foto de perfil.
+
+
+*CALENDARIO
+- Colores personalizados para los eventos
+- Borrar dentro del propio calendario.
 
 
 /////////////////////////////////////////////////////////////////////////////////
 DUDAS
-- Quiero añadir fotos de perfil (con una default). He visto que guardar las fotos en bbdd puede ralentizar mucho el proceso de consulta y que es mejor en local y lo que se guarda en en la base de datos es la ruta ¿Que os parece?¿Algo a mejorar? 
-- Nombre de contacto mirar tamaño en pixeles ( Ahora mismo style="max-width:50%")
-
 - No hay distincion en minus/mayus a la hora de comprobar usuarios/correos en inicio de sesión, cambio de Correo, etc.
-- Botones circulares o cuadrados?
 - Control de sesion por tiempo ahora mismo esta quitado, pero en el momento que lo pongamos otra vez ¿Tiempo ilimitado a la hora de que seleccionemos el "Recuerdame" del login?
 
 
@@ -64,3 +109,7 @@ DUDAS RESUELTAS
 - Poner el "Usuario" en mas informacion de los contactos? Se muestra el usuario y se ha cambiado la estetica de muestra de informacion
 - ¿Que os parecen los 4 casos de "Añadir nuevo Contacto" seguidos en el codigo html? Cambiado a switch/case
 - Cuando se comprueba si hay contactos pendientes, se tira de la misma funcion que de traer toda la lista de contactos pendientes ¿Carmbiar verdad? Se ha metido en variable
+- Los integrantes que se modifican en los grupos son solo los integrantes que son contactos y podemos añadir otros contactos, pero aquellos que no lo sean no nos apareceran, es decir, josemota no es nuestro contacto, esta en Clase pero no lo podemos modificar.
+
+
+

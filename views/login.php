@@ -5,8 +5,8 @@ $s = new SessionBean();
 // Si se quiere volver al login se tendrá que Cerrar Sesión. El closeSession lo podria poner como else de es
 
     if ( isset($_SESSION['Usuario'])){
-		echo "| Usuario : {$_SESSION['Usuario']} | Id :{$_SESSION['Id']} | Foto:{$_SESSION['Foto']}";
-    	//header('Location: index.php');  
+		//echo "| Usuario : {$_SESSION['Usuario']} | Id :{$_SESSION['Id']} | Foto:{$_SESSION['Foto']}";
+    	header('Location: index.php');  
 	}
 	
 
