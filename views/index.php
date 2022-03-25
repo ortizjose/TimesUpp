@@ -141,7 +141,7 @@ $e = new EventoDB();
 							 <label class="col-md-3 col-form-label form-control-label">Añadir a</label>
 							 <div class="col-md-9">
 								<select class="form-control" name="eventoActividad" id="eventoActividad" required>
-									<option value="">Ninguno</option>
+									<option value="" selected>Ninguno</option>
 									
 									<?php foreach(($g -> getActividadesUsuario($IdUsu)) as $actividad ):?>
 										<option value="<?= $actividad['IdAct'] ?>"> <?= $actividad['Nombre'] ?> </option>	

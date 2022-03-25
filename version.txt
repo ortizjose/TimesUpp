@@ -96,7 +96,7 @@ COSAS PENDIENTES
 *CALENDARIO
 - Colores personalizados para los eventos
 - Borrar dentro del propio calendario.
-
+- Poner height en card de Mayo/Octubre
 
 /////////////////////////////////////////////////////////////////////////////////
 DUDAS
