@@ -28,26 +28,20 @@ $gr = new GrupoDB();
 // MODIFICAR GRUPO
 	elseif( !empty($_POST['modificarGrupo']) ){
 		
-		echo "$_POST[idGrupo]";
+		$id = $_POST['idGrupo'];
+		print_r($id);
 		echo "xx $_POST[modificarGrupo] xx";
+		array_push($_POST['integrantesModificarGrupo'], $idUsu);
 		
-		$gr ->borrarGrupo($_POST['idGrupo']);
-	
-		// PRIMERO ES EL ADMIN DEL GRUPO
-		$gr ->anadirGrupo($_POST['modificarGrupo'], $idUsu, $_POST['idGrupo']);	
+		print_r($_POST['integrantesModificarGrupo']);
 		
-		foreach($_POST['integrantesModificarGrupo'] as $integrante ):
-			$res = $gr ->anadirGrupo($_POST['modificarGrupo'], $integrante, $_POST['idGrupo']);
-			//echo $integrante;
-		endforeach;		
-		
-	    if($res){ 
-			
-			    header('Location: ..\views\admGrupos.php?res=2');
-	    }
-	    else{
-			    echo "HOLA2" ;
-	    }	
+		$res = $gr ->modificarGrupo($_POST['idGrupo'], $_POST['modificarGrupo'], $_POST['integrantesModificarGrupo']);		
+
+	    if($res):
+			header('Location: ..\views\admGrupos.php?res=2');
+	    else:
+			header('Location: ..\views\error.php');
+	    endif;
 	
 	}
 
@@ -62,7 +56,7 @@ $gr = new GrupoDB();
 			
 			    header('Location: ..\views\admGrupos.php?res=3');
 	    else:
-			    echo "HOLA3" ;
+			    header('Location: ..\views\error.php');
 	    endif;		
 		
 	}
@@ -74,19 +68,18 @@ $gr = new GrupoDB();
 
 		$res =  $gr ->borrarGrupo($_POST['borraGrupo']);
 		
-	    if($res){ 
+	    if($res):
 			
 			    header('Location: ..\views\admGrupos.php?res=4');
-	    }
-	    else{
-			    echo "HOLA3" ;
-	    }			
+	    else:
+			    header('Location: ..\views\error.php');
+	    endif;		
 		
 	}
 	else{
-		echo "HOLA4" ;
+		
+		header('Location: ..\views\error.php');
 
-		//header('Location: ../index.php?nadaquehacer');
 	}
 
  ?>

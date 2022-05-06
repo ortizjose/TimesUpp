@@ -1,6 +1,7 @@
 "use strict";
 $(document).ready(function() {
 
+	console.log("HOLA");
     $('.checkbox-ripple').rkmd_checkboxRipple();
     change_checkbox_color();
 
@@ -216,21 +217,15 @@ $(document).ready(function() {
     $('#example-multiple-selected0').multiselect({
 		buttonWidth: '100%'
 	});
-    $('#example-multiple-selected1').multiselect();
-    $('#example-multiple-selected2').multiselect();
-	$('#example-multiple-selected3').multiselect();
-	$('#example-multiple-selected4').multiselect();
-	$('#example-multiple-selected5').multiselect();
-	$('#example-multiple-selected6').multiselect();
-	$('#example-multiple-selected7').multiselect();
-	$('#example-multiple-selected8').multiselect();
-	$('#example-multiple-selected9').multiselect();	
-	$('#example-multiple-selected10').multiselect();
+
 	
-	// NO VALE 
-	//document.getElementsByClassName('multiple-selected-row').multiselect();
-	//$('.multiple-selected-row').multiselect();
+	//Multi Select by class
+	$('.multiple-selected').each(function(){
+		$(this).multiselect({buttonWidth: '100%'});			
+	});
+
 	
+
 
 	
     // Multi Group Select

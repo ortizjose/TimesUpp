@@ -37,8 +37,27 @@ class EventoDB {
 
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare(" SELECT * FROM EVENTOS
-												WHERE IdUsu = '$idUsu'");
+		/*$sentence = $this -> dbc->prepare(" SELECT eventos.IdEve, eventos.Nombre, eventos.Etiqueta, 
+											eventos.Descripcion, eventos.Fecha,	eventos.FechaFin,
+											FROM eventos JOIN ACTIVIDAD on eventos.IdAct=actividad.IdAct 
+											LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo LEFT JOIN 
+											usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo 
+											WHERE actividad.IdUsu = '$idUsu' OR usuariogrupo.IdUsu = '$idUsu'; ");*/
+		
+		/*$sentence = $this -> dbc->prepare(" SELECT eventos.IdEve, eventos.Nombre, eventos.Etiqueta, 
+									eventos.Descripcion, DATE_FORMAT(eventos.Fecha, '%m-%d-%Y') AS Fecha, 
+									DATE_FORMAT(eventos.FechaFin, '%m-%d-%Y') AS FechaFin 
+									FROM eventos JOIN ACTIVIDAD on eventos.IdAct=actividad.IdAct 
+									LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo LEFT JOIN 
+									usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo 
+									WHERE actividad.IdUsu = '$idUsu' OR usuariogrupo.IdUsu = '$idUsu'; ");*/
+		
+		$sentence = $this -> dbc->prepare("SELECT eventos.IdEve, eventos.Nombre, eventos.Etiqueta, eventos.Descripcion, 
+											DATE_FORMAT(eventos.Fecha, '%m-%d-%Y') AS Fecha, DATE_FORMAT(eventos.FechaFin, '%m-%d-%Y') AS FechaFin  
+											FROM EVENTOS WHERE IdUsu = '$idUsu' OR (Grupal=1 AND IdAct = ANY 
+												(SELECT actividad.IdAct FROM ACTIVIDAD LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo 
+												LEFT JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE actividad.IdUsu = '$idUsu' 
+												OR usuariogrupo.IdUsu = '$idUsu'));");
 
 		if ($sentence->execute()): 
 			while ($row = $sentence->fetch()):
@@ -52,6 +71,7 @@ class EventoDB {
 		return $eventos;
 	}	
 
+	
 	public function anadirEvento($nombre, $etiqueta, $descrip, $fecha, $fechafin, $idUsu, $idAct, $grupal)
 	{
 		if (empty($fechafin)):
@@ -73,6 +93,21 @@ class EventoDB {
 		endif;
 	}	
 
+	
+	public function borrarEvento($idEve)
+	{
+		$sentence = $this -> dbc->prepare("DELETE FROM EVENTOS WHERE IdEve = $idEve;");
+
+		if ($sentence->execute()):
+			return "HOLA";
+		else:
+			return false;
+		endif;
+	}
+		
+	
+	
+	
 }
 ?>
 

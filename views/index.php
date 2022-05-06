@@ -12,65 +12,31 @@ $e = new EventoDB();
     	header('Location: ..\views\login.php');  
 	}
 
-
-//require '..\views\templates\header.html';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-   <title> TimesUpp </title>
+   <title> Dashboard - TimesUpp </title>
 
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-	
-<!-- General CSS -->
-   <!-- Favicon icon -->
-   <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
 
-   <!-- Google font-->
-   <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
-	
-   <!-- Font Awesome -->
-   <link href="../assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<!-- iconfont -->
-	<link rel="stylesheet" type="text/css" href="../assets/icon/icofont/css/icofont.css">
-
-   <!-- simple line icon -->
-   <link rel="stylesheet" type="text/css" href="../assets/icon/simple-line-icons/css/simple-line-icons.css">
-
-   <!-- Required Fremwork -->
-   <link rel="stylesheet" type="text/css" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
-
-   <!-- Style.css -->
-   <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
-	
-   <!-- End General CSS -->	
-   <script type="text/javascript" src="../assets/plugins/Jquery/dist/jquery.min.js"></script>
-	
-   <link rel="stylesheet" href="../assets/plugins/multiselect/css/multi-select.css" />
-   <link rel="stylesheet" href="../assets/plugins/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" />
+	<?php require '../views/templates2/generalCss.html';?>
 	
    <!-- Evo Calendar -->	
-   <link rel="stylesheet" href="../assets/css/evo-calendar/evo-calendar.css" />
-   <link rel="stylesheet" href="../assets/css/evo-calendar/evo-calendar.midnight-blue.css" />
-   <script type="text/javascript" src="../assets/js/evo-calendar.js"></script>
-   
+   <link rel="stylesheet" href="../assets/plugins/evocalendar/css/evo-calendar.css" />
+   <link rel="stylesheet" href="../assets/plugins/evocalendar/css/evo-calendar.midnight-blue.css" />
    <link rel="stylesheet" href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">	
+	
 </head>
-	
+
 <body class="sidebar-mini fixed">
-   <div class="loader-bg">
-      <div class="loader-bar">
-      </div>
-   </div>
-	
-<?php require '..\views\templates\navbarOK.html';	?>
-	
+
+<?php require '../views/templates2/barSidebar.html';?>
+
       <!-- Dashboard Start -->
       <div class="content-wrapper">
          <!-- Container-fluid starts -->
@@ -232,112 +198,29 @@ $e = new EventoDB();
       </div>
    </div>
 
-   <!-- Generic JS for Theme -->
-
-   <script type="text/javascript" src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-   <script type="text/javascript" src="../assets/plugins/tether/dist/js/tether.min.js"></script>
-
-   <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="../assets/js/main.min.js"></script>
-
-   <!-- Perfil JS -->
-   <script type="text/javascript" src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-   <script type="text/javascript" src="../assets/pages/accordion.js"></script>	
+ 	<?php require '../views/templates2/generalJs.html';?>
+ 	<?php require '../assets/plugins/evocalendar/php/indexCalendar.php';?>	
 	
-   <!-- Bootstrap Datepicker js -->
-   <script type="text/javascript" src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
-   <script type="text/javascript" src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>   
-   <script>
-	// initialize your calendar, once the page's DOM is ready
-	$(document).ready(function() {
-		
-		$('#calendar').evoCalendar({
-			theme: 'Midnight Blue',
-			language: 'es',
-			eventHeaderFormat: 'd MM yyyy',
-			todayHighlight: true,
-			firstDayOfWeek: 1
-		});
-	
-		var eventos = [];
-		
-		<?php foreach ($e -> getEventos($IdUsu) as $evento ): 
-			if ( empty ($evento['FechaFin'])):
-		?>
-		
-		 eventos.push({ 
-			id: "<?= $evento['IdEve'] ?>",
-			name: "<?= $evento['Nombre'] ?>",
-			description: "<?= $evento['Descripcion'] ?>",
-			badge: "<?= $evento['Etiqueta'] ?>",
-			date: "<?= $evento['Fecha'] ?>"  ,
-			type: "birthday",
-	
-		} );
-		
-		<?php else: ?>
-		
-		 eventos.push({ 
-			id: "<?= $evento['IdEve'] ?>",
-			name: "<?= $evento['Nombre'] ?>",
-			description: "<?= $evento['Descripcion'] ?>",
-			badge: "<?= $evento['Etiqueta'] ?>",
-			date: ["<?= $evento['Fecha'] ?>" ,"<?= $evento['FechaFin'] ?> " ] ,
-			type: "event",
-	
-		} );
-		
-		<?php endif;
-			 endforeach; ?>
-		
-		//console.log(eventos);
-		
-		$('#calendar').evoCalendar("addCalendarEvent", eventos);
-		//$('#calendar').evoCalendar("removeCalendarEvent",'1');
-	
-		document.getElementById("eventoActividad").onchange = function(){
-			console.log(document.getElementById("eventoActividad").value);
-			if ( !isNaN( document.getElementById("eventoActividad").value ) ){
-					document.getElementById('eventoGrupal').disabled = false;
-			} 
-
-		};
-	
-		
-	})
-   </script>
-
-   <!-- Scrollbar J	S-->
-   <script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+   <!-- Evo Calendar -->		
+	<script type="text/javascript" src="../assets/plugins/evocalendar/js/evo-calendar.js"></script>
+	<script>
+	  function ajaxCall(id){
     
-   <!-- Date picker.js -->
-   <script src="../assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
-   <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+		  var url = "../assets/plugins/evocalendar/php/borrarEvento.php";
+		  var params = "somevariable=somevalue&anothervariable=anothervalue";
+		  var http = new XMLHttpRequest();
 
-   <!-- Select 2 js -->
-   <script src="../assets/plugins/select2/dist/js/select2.full.min.js"></script>
+		  http.open("GET", url+"?"+"id="+id, true);
+		  http.onreadystatechange = function()
+		  {
+			if(http.readyState == 4 && http.status == 200) {
+			  console.log(http.responseText);
+			}
+		  }
+		  http.send(null)
 
-   <!-- Max-Length js -->
-   <script src="../assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
-
-   <!-- Multi Select js -->
-   <script src="../assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
-   <script src="../assets/plugins/multiselect/js/jquery.multi-select.js"></script>
-
-   <!-- Tags js -->
-   <script src="../assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
-
-   <!-- Bootstrap Datepicker js -->
-    <script type="text/javascript" src="../assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-    <!-- bootstrap range picker -->
-    <script type="text/javascript" src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-   <!-- custom js -->
-   <script type="text/javascript" src="../assets/pages/advance-form.js"></script>
-	
-	
+	  } 	
+	</script>
 </body>
 
 </html>

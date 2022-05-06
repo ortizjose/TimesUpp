@@ -16,9 +16,26 @@ $a = new ActividadDB();
 
 	$actividades = $a -> getActividadesUsuario($IdUsu);
 
-require '..\views\templates\header.html';
-require '..\views\templates\navbar.html';
 ?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <title> Actividades - TimesUpp </title>
+
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+	<?php require '../views/templates2/generalCss.html';?>
+	
+
+	
+</head>
+
+<body class="sidebar-mini fixed">
+
+<?php require '../views/templates2/barSidebar.html';?>
 
       <!-- Dashboard Start -->
       <div class="content-wrapper">
@@ -160,7 +177,7 @@ require '..\views\templates\navbar.html';
                     </div>
                 </div>
 
-               <div class="col-lg-5">
+               <div class="col-xl-5 col-lg-12">
                   <div class="card">
                     <div class="addCardCrearActividad">
                       <div class="card-header">
@@ -180,7 +197,7 @@ require '..\views\templates\navbar.html';
                               <div class="form-group row">
                                  <label class="col-md-2 col-form-label form-control-label">Grupo</label>
                                  <div class="col-md-10">
-									<select class="form-control" name="grupoNuevaActividad" id="example-single">
+									<select class="form-control" name="grupoNuevaActividad" >
                                             <option value="Ninguno">Ninguno</option>
                                           
                                              <?php foreach (($gr -> getGruposUsuario($IdUsu)) as $grupo): ?>
@@ -212,20 +229,17 @@ require '..\views\templates\navbar.html';
                 </div>				
 				
 				
-               </div>
-
-            </div>
+             </div>
             <!-- 2-1 block end -->
 
-          </div>
-
-         </div>
          <!-- Main content ends -->
          <!-- Container-fluid ends -->
 
-      </div>
-   </div>
+		  </div>
+	   </div>
+         
+  <?php require '../views/templates2/generalJs.html';?>
 
+</body>
 
-<?php require '..\views\templates\footer.html'; ?>
-
+</html>

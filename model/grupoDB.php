@@ -112,6 +112,7 @@ class GrupoDB {
 
 	}
 
+	
 	public function anadirGrupo($nombre, $integrantes)
 	{
 
@@ -140,10 +141,39 @@ class GrupoDB {
 	
 	}	
 
+
+	public function modificarGrupo($idGrupo, $nombre, $integrantes)
+	{
+		
+		$sentence = $this -> dbc->prepare("UPDATE GRUPO SET Nombre='$nombre' WHERE IdGrupo='$idGrupo'");
+		
+		if($sentence->execute()):
+		
+			$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo='$idGrupo'");
+			$sentence->execute();
+		
+			//$sentence = $this -> dbc->prepare("SELECT @@IDENTITY AS IdGrupo;");
+		
+			foreach ($integrantes as $integrante):
+		
+				$sentence = $this -> dbc->prepare("INSERT INTO USUARIOGRUPO(IdGrupo, IdUsu) VALUES ('$idGrupo','$integrante')");
+				if(!$sentence->execute()):
+					return false;
+				endif;
+					
+			endforeach;
+		
+			return true;
+		else:
+			return false;	
+		endif;
+	
+	}		
+	
 	
 	public function salirGrupo($idGrupo, $idUsu)
 	{
-		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo = $idGrupo AND IdUsu = '$idUsu'");
+		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo = '$idGrupo' AND IdUsu = '$idUsu'");
 
 		if ($sentence->execute()):
 			return true;
@@ -153,7 +183,6 @@ class GrupoDB {
 		
 	}		
 	
-
 	
 	public function borrarGrupo($idGrupo)
 	{

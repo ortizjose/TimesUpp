@@ -44,7 +44,6 @@
                 calendarEvents: null
             };
             _.options = $.extend({}, _.defaults, settings);
-			console.log('TEST2:'+$(element));
             _.initials = {
                 default_class: $(element)[0].classList.value,
                 validParts: /dd?|DD?|mm?|MM?|yy(?:yy)?/g,
@@ -172,7 +171,7 @@
                 year: (isNaN(this.year) || this.year == null) ? new Date().getFullYear() : this.year,
                 date: _.formatDate(_.initials.dates[_.defaults.language].months[new Date().getMonth()]+' '+new Date().getDate()+' '+ new Date().getFullYear(), _.options.format)
             }
-
+			
             // ACTIVE
             _.$active = {
                 month: _.$current.month,
@@ -239,7 +238,6 @@
     // v1.0.0 - Initialize plugin
     EvoCalendar.prototype.init = function(init) {
         var _ = this;
-        console.log('TEST:'+_.$elements.calendarEl);
         if (!$(_.$elements.calendarEl).hasClass('calendar-initialized')) {
             $(_.$elements.calendarEl).addClass('evo-calendar calendar-initialized');
             if (_.windowW <= _.$breakpoints.tablet) { // tablet/mobile
@@ -287,6 +285,23 @@
         }
         return title;
     }
+	
+    // v1.0.0 - Limit title (...)
+    EvoCalendar.prototype.smallTitle = function(title, limit) {
+        var newTitle = [];
+        limit = limit === undefined ? 18 : limit;
+        if ((title).split(' ').join('').length > limit) {
+            var t = title.split(' ');
+            for (var i=0; i<t.length; i++) {
+                if (t[i].length + newTitle.join('').length <= limit) {
+                    newTitle.push(t[i])
+                }
+            }
+            return false;
+        }
+        return true;
+    }	
+	
 
     // v1.1.2 - Check and filter strings
     EvoCalendar.prototype.stringCheck = function(d) {
@@ -668,26 +683,40 @@
         if (event_data.color) {
             markup += 'style="background-color:'+event_data.color+'"'
         }
-        markup += '></div></div><div class="event-info"><p class="event-title">'+_.limitTitle(event_data.name);
+		if(_.smallTitle(event_data.name)) markup += '></div></div><div class="event-info" style="font-size:12px"><p class="event-title">'+_.limitTitle(event_data.name);
+		else markup += '></div></div><div class="event-info" style="font-size:12px"><p class="event-title2">'+event_data.name;
+		
+        
         if (event_data.badge) markup += '<span>'+event_data.badge+'</span>';
         markup += '</p>'
         if (event_data.description) markup += '<p class="event-desc">'+event_data.description+'</p>';
 
 		markup += '<div class="event-delete" tabindex="1" align="right">';
-		markup +='<button id="buton-event-delete" class="btn btn-danger btn-icon waves-effect">';
+		markup +='<button class="button-event-delete btn btn-danger btn-icon waves-effect" onclick=removeEve('+event_data.id+')>';
+		//markup +='<button class="button-event-delete btn btn-danger btn-icon waves-effect" value="'+(event_data.id)+'" >';
+
+		
 		markup +='<i class="icon-trash icon-white"></i></button>';
         markup += '</div>';		
 		
 		
 		markup += '</div>';
         markup += '</div>';
-        eventListEl.append(markup);
+        markup += "<script> function removeEve(idEvent){ajaxCall(idEvent);idEvent = idEvent.toString();$('#calendar').evoCalendar('removeCalendarEvent',(idEvent));}";
+		
+		//markup += "function ajaxCall(id){var url = '../assets/plugins/evocalendar/php/borrado.php';var params = 'somevariable=somevalue&anothervariable=anothervalue';var http = new XMLHttpRequest();http.open('GET', url+'?'+'id='+id, true); http.onreadystatechange = function(){if(http.readyState == 4 && http.status == 200) { console.log(http.responseText);} }http.send(); }";
+		markup += '</script>';
+		
+		eventListEl.append(markup);
 
+		 
 
         _.$elements.eventEl.find('[data-event-index="'+(event_data.id)+'"]')
         .off('click.evocalendar')
         .on('click.evocalendar', _.selectEvent);
     }
+	
+
     // v1.0.0 - Remove single event to event list
     EvoCalendar.prototype.removeEventList = function(event_data) {
         var _ = this, markup;
@@ -1086,8 +1115,8 @@
 
     // v1.0.0 - Remove Calendar Event(s)
     EvoCalendar.prototype.removeCalendarEvent = function(arr) {
-        var _ = this;
-
+        var _ = this;	
+		
         function deleteEvent(data) {
             // Array index
             var index = _.options.calendarEvents.map(function (event) { return event.id }).indexOf(data);
@@ -1135,9 +1164,9 @@
         return _;
     };
 
+	
+	
+	
 }));
 
-    $("#removeBtn").click(function() {
-        //var id = 1;
-        $('#calendar').evoCalendar("removeCalendarEvent",'1');
-    });
+

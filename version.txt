@@ -73,7 +73,8 @@
 COSAS PENDIENTES
 
 *GENERICO
-- Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones
+- Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones. Cuando se repliega el navbar y se quiere seleccionar la casilla de Actividades o Grupos no funciona como deberia.
+- Revisar que el 
 
 *ACTIVIDAD
 - Meter en Actividad idGrupo como FK y tirar de idGrupo o idUsu según sea grupal o no
@@ -110,6 +111,7 @@ DUDAS RESUELTAS
 - ¿Que os parecen los 4 casos de "Añadir nuevo Contacto" seguidos en el codigo html? Cambiado a switch/case
 - Cuando se comprueba si hay contactos pendientes, se tira de la misma funcion que de traer toda la lista de contactos pendientes ¿Carmbiar verdad? Se ha metido en variable
 - Los integrantes que se modifican en los grupos son solo los integrantes que son contactos y podemos añadir otros contactos, pero aquellos que no lo sean no nos apareceran, es decir, josemota no es nuestro contacto, esta en Clase pero no lo podemos modificar.
+
 
 
 

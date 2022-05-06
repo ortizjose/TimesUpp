@@ -18,10 +18,26 @@ $gr = new GrupoDB();
   $grupos = $gr -> getGruposUsuario($IdUsu);
   $contactos = $u -> getContactos($IdUsu);
 
-require '..\views\templates\header2.html';
-require '..\views\templates\navbar.html';
-
 ?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<title> Grupos - TimesUpp </title>
+
+	<!-- Meta -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+
+	<?php require '../views/templates2/generalCss.html';?>
+	
+	
+
+<body class="sidebar-mini fixed">
+
+<?php require '../views/templates2/barSidebar.html';?>
 
       <!-- Dashboard Start -->
       <div class="content-wrapper">
@@ -108,7 +124,7 @@ require '..\views\templates\navbar.html';
 										   <label for="example-text-input" class="col-md-3 col-xs-4 col-form-label form-control-label">Modificar Integrantes</label>
 										   <div class="col-md-7 col-xs-8">
 											 	<!-- Pequeño problema. Id es único y por lo tanto en js de advance-form.js hay que poner una línea de id. CSS en boostrap-multiselect.css-->
-												<select class="form-control " id="example-multiple-selected<?= $i ?>" name="integrantesModificarGrupo[]" multiple="multiple" required>                   
+												<select class="form-control multiple-selected"  name="integrantesModificarGrupo[]" multiple="multiple" required>                   
 												  <?php foreach ($gr -> getIntegrantesContactos($grupo['IdGrupo'], $IdUsu) as $integrante): 
 												   if ( $integrante['IdGrupo'] == $grupo['IdGrupo'] ):?>
 
@@ -195,7 +211,7 @@ require '..\views\templates\navbar.html';
 				
 				
 				
-               <div class="col-lg-5">
+               <div class="col-xl-5 col-lg-12">
                   <div class="card">
                     <div class="addCardCrearGrupo">
                       <div class="card-header">
@@ -280,6 +296,13 @@ require '..\views\templates\navbar.html';
 
       </div>
    </div>
+         
+  <?php require '../views/templates2/generalJs.html';?>
+
+ <script type="text/javascript" src="../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
 
 
-<?php require '..\views\templates\footer2.html'; ?>
+
+</body>
+
+</html>
