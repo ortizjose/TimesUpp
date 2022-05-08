@@ -1,9 +1,11 @@
-
-
+ <div class="loader-bg">
+      <div class="loader-bar">
+      </div>
+   </div>
    <div class="wrapper">
       <!-- Navbar-->
       <header class="main-header-top hidden-print">
-         <a href="index.php" class="logo"><img class="img-fluid able-logo" src="../assets/images/logo.png" alt="Theme-logo"></a>
+         <a href="../views/index.php" class="logo"><img class="img-fluid able-logo" src="../assets/images/logo.png" alt="Theme-logo"></a>
          <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#!" data-toggle="offcanvas" class="sidebar-toggle"></a>
@@ -18,8 +20,8 @@
                      </a>
                      <ul class="dropdown-menu settings-menu">
                         <li><a href="#!"><i class="icon-settings"></i> Ajustes</a></li>
-                        <li><a href="perfil.php"><i class="icon-user"></i> Mi Perfil</a></li>
-						<li><a href="contactos.php"><i class="icon-notebook"></i> Contactos</a></li>
+                        <li><a href="../views/perfil.php"><i class="icon-user"></i> Mi Perfil</a></li>
+						<li><a href="../views/contactos.php"><i class="icon-notebook"></i> Contactos</a></li>
                         <li class="p-0">
                            <div class="dropdown-divider m-0"></div>
                         </li>
@@ -54,14 +56,15 @@
 					  
 				<?php endif;?>
 
-                    <a class="waves-effect waves-dark" href="index.php">
+                    <a class="waves-effect waves-dark" href="../views/index.php">
                         <i class="icon-speedometer" ></i><span> Dashboard</span>
                     </a>                
                 </li>
 
 
 				<!-- Colorea el elemento o no, si está en la pagina del elemento -->
-				<?php if (strnatcasecmp($_SERVER["REQUEST_URI"],"/timesupp/views/XXXX.php") == 0):?> 
+				<?php if (!strpos($_SERVER["REQUEST_URI"],"actividad.php") == 0):
+					?> 
 
                   <li class="active treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-docs"></i><span>Actividades</span><i class="icon-arrow-down"></i></a>
                 
@@ -74,7 +77,7 @@
                 foreach (($g -> getActividadesUsuario($IdUsu)) as $activ): ?>
  
                     <ul class="treeview-menu">
-                        <li><a class="waves-effect waves-dark" href="sample-page.html"><i class="icon-arrow-right"></i><?= $activ['Nombre']; ?> </a></li>
+                        <li><a class="waves-effect waves-dark" href="../views/actividad.php?act=<?= $activ['IdAct']; ?>"><i class="icon-arrow-right"></i><?= $activ['Nombre']; ?> </a></li>
                     </ul>
 					  
 				<?php endforeach; ?>
@@ -96,7 +99,7 @@
                 foreach (($g -> getGruposUsuario($IdUsu)) as $grup): ?>
 
                     <ul class="treeview-menu">
-                        <li><a class="waves-effect waves-dark" href="grupo.php?grupo=<?= $grup['IdGrupo']; ?>" ><i class="icon-arrow-right"></i> <?= $grup['Nombre']; ?> </a></li>               
+                        <li><a class="waves-effect waves-dark" href="../views/grupo.php?grupo=<?= $grup['IdGrupo']; ?>" ><i class="icon-arrow-right"></i> <?= $grup['Nombre']; ?> </a></li>               
                     </ul>
 
 				<?php endforeach; ?>
@@ -117,7 +120,7 @@
 					 
 				<?php endif; ?>
 					  
-                    <a class="waves-effect waves-white" href="admActividad.php">
+                    <a class="waves-effect waves-white" href="../views/admActividad.php">
                         <i class="icon-pencil" ></i><span> Administrar Actividades </span>
                     </a>                
                 </li>
@@ -134,7 +137,7 @@
 					  
 				<?php endif; ?>
 					  
-                    <a class="waves-effect waves-dark" href="loquesea.php">
+                    <a class="waves-effect waves-dark" href="../views/loquesea.php">
                         <i class="icon-note" ></i><span> Crear Tarea </span>
                     </a>                
                 </li>
@@ -151,7 +154,7 @@
 					  
 				<?php endif; ?>
 					  
-                    <a class="waves-effect waves-dark" href="loquesea.php">
+                    <a class="waves-effect waves-dark" href="../views/loquesea.php">
                         <i class="icon-clock" ></i><span> Crear Recordatorio </span>
                     </a>                
                 </li>
@@ -168,7 +171,7 @@
 					  
 				<?php endif; ?>
 
-                    <a class="waves-effect waves-dark" href="admGrupos.php">
+                    <a class="waves-effect waves-dark" href="../views/admGrupos.php">
                         <i class="icon-user-follow" ></i><span> Administrar Grupos </span>
                     </a>                
                 </li>

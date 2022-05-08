@@ -27,7 +27,7 @@ $a = new ActividadDB();
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
-	<?php require '../views/templates2/generalCss.html';?>
+	<?php require 'templates/GeneralCss.html';?>
 	
 
 	
@@ -35,7 +35,7 @@ $a = new ActividadDB();
 
 <body class="sidebar-mini fixed">
 
-<?php require '../views/templates2/barSidebar.html';?>
+<?php require 'templates/barSidebar.html';?>
 
       <!-- Dashboard Start -->
       <div class="content-wrapper">
@@ -238,7 +238,7 @@ $a = new ActividadDB();
 		  </div>
 	   </div>
          
-  <?php require '../views/templates2/generalJs.html';?>
+  <?php require 'templates/generalJs.html';?>
 
 </body>
 

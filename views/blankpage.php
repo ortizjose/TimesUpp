@@ -18,7 +18,7 @@ $a = new ActividadDB();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
    <title> TimesUpp </title>
@@ -27,7 +27,7 @@ $a = new ActividadDB();
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
-	<?php require '../views/templates2/generalCss.html';?>
+	<?php require 'templates/GeneralCss.html';?>
    <link rel="stylesheet" href="../assets/plugins/evocalendar/css/evo-calendar.css" />
    <link rel="stylesheet" href="../assets/plugins/evocalendar/css/evo-calendar.midnight-blue.css" />
 
@@ -35,7 +35,7 @@ $a = new ActividadDB();
 
 <body class="sidebar-mini fixed">
 
-<?php require '../views/templates2/barSidebar.html';?>
+<?php require 'templates/barSidebar.html';?>
 
 <!-- Dashboard Start -->
       <div class="content-wrapper">
@@ -89,7 +89,7 @@ $a = new ActividadDB();
       </div>
    </div>
 
-<?php require '../views/templates2/generalJs.html';?>
+<?php require 'templates/generalJs.html';?>
 	<script type="text/javascript" src="../assets/plugins/evocalendar/js/evo-calendar.js"></script>
 <script>
 $(document).ready(function() {

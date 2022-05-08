@@ -1,7 +1,6 @@
 "use strict";
 $(document).ready(function() {
 
-	console.log("HOLA");
     $('.checkbox-ripple').rkmd_checkboxRipple();
     change_checkbox_color();
 

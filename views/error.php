@@ -9,9 +9,23 @@ $s = new SessionBean();
 	}
 
 
-require '..\views\templates\header.html';
-
 ?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <title> Error - TimesUpp </title>
+
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+	<?php require 'templates/GeneralCss.html';?>
+	
+</head>
+
+<body class="sidebar-mini fixed">
+
 
 
 <div class="error-404">
@@ -32,5 +46,6 @@ require '..\views\templates\header.html';
 </div>
 
 
+</body>
 
-<?php require '..\views\templates\footer.html'; ?>
+</html>

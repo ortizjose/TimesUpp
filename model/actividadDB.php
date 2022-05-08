@@ -136,7 +136,18 @@ class ActividadDB {
 			return false;
 		endif;
 	}
+
 	
+	public function getActividad($idAct)
+	{
+		$actividas = array();
+		$sentence = $this -> dbc->prepare("SELECT * FROM ACTIVIDAD WHERE IdAct = $idAct");
+		$sentence->execute();
+		$actividas[0]=$sentence->fetch();	
+
+		return $actividas;		
+		
+	}
 	
 	
 }

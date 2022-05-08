@@ -14,7 +14,7 @@ $s = new SessionBean();
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Iniciar Sesión - TimesUpp</title>
+	<title> Iniciar Sesión - TimesUpp </title>
 
 	<!-- Meta -->
 	<meta charset="utf-8">

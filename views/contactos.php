@@ -16,11 +16,26 @@ $u = new usuarioDB();
 	$contactoSalientes = $u -> getContactosPendientesSalientes($IdUsu);
 	$contactos = $u -> getContactos($IdUsu);
 
-require '..\views\templates\header.html';
-require '..\views\templates\navbar.html';
-
 ?>
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+	<title> Contactos - TimesUpp </title>
+
+	<!-- Meta -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+
+	<?php require 'templates/GeneralCss.html';?>
+	
+	
+
+<body class="sidebar-mini fixed">
+
+<?php require 'templates/barSidebar.html';?>
       <!-- Dashboard Start -->
       <div class="content-wrapper">
          <!-- Container-fluid starts -->
@@ -362,4 +377,8 @@ require '..\views\templates\navbar.html';
    </div>
 
 
-<?php require '..\views\templates\footer.html'; ?>
+  <?php require 'templates/generalJs.html';?>
+
+</body>
+
+</html>

@@ -15,11 +15,25 @@ $u = new usuarioDB();
 
 	$usuario = $u -> getUsuario($IdUsu);
 
-require '..\views\templates\header.html';
-require '..\views\templates\navbar.html';
+
 
 ?>
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+   <title> Mi Perfil - TimesUpp </title>
+
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+	<?php require 'templates/GeneralCss.html';?>
+</head>
+
+<body class="sidebar-mini fixed">
+
+<?php require 'templates/barSidebar.html';?>
       <!-- Dashboard Start -->
       <div class="content-wrapper">
          <!-- Container-fluid starts -->
@@ -75,31 +89,33 @@ require '..\views\templates\navbar.html';
 										<p class="text-sm-center"> <?= $usuario[0]['Usuario']?> </p>
 									</div>
 								</div>
+							
 								<div class="col-lg-4">
 									<div class="p-20 z-depth-left-1 waves-effect" data-toggle="tooltip" data-placement="top" title="Email">
 										<p class="text-sm-center "> <?= $usuario[0]['Email']?> </p>
 									</div>
 								</div>
 								<div class="col-lg-4">
-									<div class="p-20 z-depth-left-2 waves-effect" data-toggle="tooltip" data-placement="top" title=".z-depth-left-2">
-										<p class="text-sm-center">Numero de Grupos</p>
+									<div class="p-20 z-depth-left-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Recuento de contactos">
+										<p class="text-sm-center"> Tripulantes: <?= $u -> getNumContactos($IdUsu);?> </p>
 									</div>
 								</div>
 								<div class="col-lg-4">
-									<div class="p-20 z-depth-left-3 waves-effect" data-toggle="tooltip" data-placement="top" title=".z-depth-left-3">
-										<p class="text-sm-center">Numero de Actividades</p>
+									<div class="p-20 z-depth-left-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Recuento de actividades">
+										<p class="text-sm-center"> Programas Espaciales: <?= $u -> getNumActividades($IdUsu);?> </p>
+									</div>
+								</div>								
+								<div class="col-lg-4">
+									<div class="p-20 z-depth-left-3 waves-effect" data-toggle="tooltip" data-placement="top" title="Recuento de grupos">
+										<p class="text-sm-center"> Grupos de Astronautas : <?= $u -> getNumGrupos($IdUsu);?> </p>
 									</div>
 								</div>
 								<div class="col-lg-4">
-									<div class="p-20 z-depth-left-4 waves-effect" data-toggle="tooltip" data-placement="top" title=".z-depth-left-4">
-										<p class="text-sm-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="p-20 z-depth-left-4 waves-effect" data-toggle="tooltip" data-placement="top" title="Cita de Giuseppe Cocconi">
+										<p class="text-sm-center">La probabilidad de éxito es difícil de estimar, pero si nunca buscamos, la oportunidad de tener éxito es cero.</p>
 									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="p-20 z-depth-left-5 waves-effect" data-toggle="tooltip" data-placement="top" title=".z-depth-left-5">
-										<p class="text-sm-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									</div>
-								</div>
+								</div>	
+
 							</div>	 
                       </div>
                   	</div>
@@ -154,8 +170,8 @@ require '..\views\templates\navbar.html';
 										</div>
 
 										<div class="form-check">
-											<label for="inline2chk" class="form-check-label ">
-												<input id="inline2chk" class="form-check-input" type="checkbox" required> Confirmar
+											<label for="inline1chk" class="form-check-label ">
+												<input id="inline1chk" class="form-check-input" type="checkbox" required> Confirmar
 											</label>
 										</div>
 
@@ -274,5 +290,19 @@ require '..\views\templates\navbar.html';
       </div>
    </div>
 
+	<?php require 'templates/generalJs.html';?>
+	<script>
+		
+	// Submit Automatico de Foto de Perfil
+	document.getElementById("fotoPerfil").onchange = function(){
+		document.getElementById('formFotoPerfil').submit();
+	} 
 
-<?php require '..\views\templates\footer.html'; ?>
+
+	</script>
+
+
+
+</body>
+
+</html>

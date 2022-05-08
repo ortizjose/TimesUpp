@@ -203,7 +203,38 @@ class UsuarioDB {
 	
 	}
 
+	public function getNumContactos($idUsu)
+	{
+		//$num = array();
+		$sentence = $this -> dbc->prepare("SELECT count(*) AS contactos FROM CONTACTOS 
+											WHERE (IdUsu1=$idUsu OR IdUsu2=$idUsu) AND Pendiente=0");
+		$sentence->execute();
+		$num=$sentence->fetch();	
+
+		return $num[0];
+	}		
 	
+	public function getNumActividades($idUsu)
+	{
+		//$num = array();
+		$sentence = $this -> dbc->prepare("SELECT count(*) FROM ACTIVIDAD LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo LEFT JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE actividad.IdUsu = $idUsu OR usuariogrupo.IdUsu = $idUsu");
+		$sentence->execute();
+		$num=$sentence->fetch();	
+
+		return $num[0];
+	}	
+	
+	public function getNumGrupos($idUsu)
+	{
+		//$num = array();
+		$sentence = $this -> dbc->prepare("SELECT count(*) AS grupos FROM GRUPO g 
+											JOIN usuariogrupo ug ON ug.IdGrupo = g.IdGrupo 
+											WHERE ug.IdUsu=$idUsu");
+		$sentence->execute();
+		$num=$sentence->fetch();	
+
+		return $num[0];
+	}	
 	
 	
 	/* #########################################################################

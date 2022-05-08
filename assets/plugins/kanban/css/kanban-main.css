@@ -1,0 +1,186 @@
+.kanban {
+	padding: 2%;
+	width: 100%;
+	
+	background: #393e46;
+	border-radius: 5px;
+	margin: 0 auto;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-flow: wrap;
+}
+
+.kanban * {
+	font-family: sans-serif;
+}
+
+.kanban__column { /*:nth-child(N)*/
+	width: 30%
+}
+
+.kanban__column-title {
+	margin-bottom: 20px;
+	font-size: 30px;
+	text-align:center;
+	color: white;
+	user-select: none;
+}
+
+.kanban__item-box{
+	background: #E5E5E5;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	padding: 3%;
+}
+
+.kanban__item-priority{
+	padding: 2.5%;
+	margin-top: 2%;
+	margin-bottom: 3%;
+	
+	font-size: 13px;
+	color: white;
+	text-align: center;
+	background: linear-gradient(to right, #2563eb 60%, #60a5fa );
+	border-style: none;
+	border-radius: 5px;
+
+	/* Flecha select fuera*/
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance:none;
+	outline: 0;
+	
+}
+
+.kanban__item-priority option{
+	background: #393e46 ;
+}
+
+.kanban__column-select {
+
+	text-align: center;
+	display: none;
+}
+
+.kanban__column-button {
+	margin-top: 3%;
+	padding: 2%;
+	font-size: 13px;
+	color: white;
+	text-align: center;
+	background: linear-gradient(to right, #393e46 50%, #67696B );
+	border-style: none;
+	border-radius: 5px;
+
+}
+
+.kanban__modal-back {
+ 	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	align-items: center;
+    justify-content: center;
+    position: fixed;
+    pointer-events: none;
+ 
+  	top: 0;
+  	left: 0;
+  	height: 100vh;
+  	width: 100vw;
+  	transition: opacity 0.3s ease;
+}
+
+.show {
+  pointer-events: auto;
+  display: flex;
+}
+
+.kanban__modal-content {
+  background-color: #E5E5E5;
+  min-width: 30%;
+  max-width: 80%;
+  padding: 2%;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+
+  border: 5px;
+  border-style: solid;
+  border-color: #393e46;
+}
+
+.kanban__modal-content h1 {
+  margin: 0;
+
+}
+
+.kanban__modal-content p {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+.kanban__modal-content button{
+	min-width: 20%;
+	padding: 8px;
+	font-size: 14px;
+	color: white;
+	background: #00adb5;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+
+
+
+
+.kanban__item-input {
+	padding: 3%;
+	margin-bottom: 0;
+	background: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.select-items div, .select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+.kanban__dropzone {
+	height: 10px;
+	transition: background 0.15s, height 0.15s;
+}
+
+.kanban__dropzone--active {
+	height: 35px;
+	background: rgba(0, 0, 0, 100);
+	border-radius: 5px;	
+	margin-bottom: 10px;
+	margin-top: 10px;
+}	
+
+.kanban__add-item {
+	width: 100%;
+	padding: 10px 0;
+	font-size: 16px;
+	color: white;
+	background: #00adb5;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+@media(max-width: 768px){
+
+	.kanban__column {
+		margin-bottom: 30px;
+		width: 100%;
+	}
+}

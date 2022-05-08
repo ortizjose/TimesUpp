@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Registrarse - TimesUpp</title>
+	<title> Registrarse - TimesUpp</title>
 
 	<!-- Meta -->
 	<meta charset="utf-8">

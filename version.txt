@@ -73,8 +73,7 @@
 COSAS PENDIENTES
 
 *GENERICO
-- Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones. Cuando se repliega el navbar y se quiere seleccionar la casilla de Actividades o Grupos no funciona como deberia.
-- Revisar que el 
+- Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones. Cuando se repliega el navbar y se quiere seleccionar la casilla de Actividades o Grupos no funciona como deberia. 
 
 *ACTIVIDAD
 - Meter en Actividad idGrupo como FK y tirar de idGrupo o idUsu según sea grupal o no
@@ -83,11 +82,12 @@ COSAS PENDIENTES
 *GRUPOS
 - Revisar la adaptación del selectable multiple de crear grupo.
 - Revisar el selectable de modificar grupo para que a partir de dos personas cuente en vez de mostrar, o se adapte.
-- Unificar el footer2 a footer
 - Integrantes del crear no se muestra correctamente con varias pestañas
 - Al pulsar crear actividad se le puede pasar por post una variable para que se seleccione directamente el grupo en el "crear actividad".
 
+
 *CONTACTOS
+- Quitar la opción de poder añadirte a ti mismo.
 
 
 *PERFIL
@@ -96,8 +96,10 @@ COSAS PENDIENTES
 
 *CALENDARIO
 - Colores personalizados para los eventos
-- Borrar dentro del propio calendario.
 - Poner height en card de Mayo/Octubre
+
+*USUARIO
+- Descomentar el control de tiempo de Sesión en SessionBean cuando se termine.
 
 /////////////////////////////////////////////////////////////////////////////////
 DUDAS
