@@ -18,6 +18,7 @@ export default class Column {
 		this.elements.items.appendChild(topDropZone);
 
 		this.elements.addItem.addEventListener("click", () => {
+			
 			const newItem = KanbanAPI.insertItem(id, "");
 
 			this.renderItem(newItem);
@@ -25,6 +26,7 @@ export default class Column {
 
 		});
 
+		//debugger;
 		KanbanAPI.getItems(id).forEach(item => {
 
 			this.renderItem(item);

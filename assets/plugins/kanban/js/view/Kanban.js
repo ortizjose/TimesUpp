@@ -5,15 +5,17 @@ import KanbanAPI from "../api/KanbanAPI.js";
 export default class Kanban {
 	constructor(root) {
 		this.root = root;
+		
+	Kanban.columns().forEach(column => {
 
-		Kanban.columns().forEach(column => {
-			const columnView = new Column(column.id, column.title);
+		const columnView = new Column(column.id, column.title);
+
+		this.root.appendChild(columnView.elements.root);
 
 
-			this.root.appendChild(columnView.elements.root);
 
-		});
-
+	});
+		
 		const priorityButtons = document.getElementsByClassName('kanban__item-priority');			
 		KanbanAPI.cambioColor(priorityButtons);
 	}

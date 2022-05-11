@@ -66,7 +66,7 @@ $a = new ActividadDB();
                         <h5 class="card-header-text">Menu de tareas: <?= $actividad[0]['Nombre'] ?></h5>
                      </div>
 
-                    <div class="CardB1-responisve">
+                    <div class="CardB2-responisve">
                      <div class="card-block">
 						
 						<div class="kanban"></div>
@@ -87,9 +87,9 @@ $a = new ActividadDB();
                     <div class="CardB1-responisve">
                      <div class="card-block">
 						
-						<br/> 
+
 						<div id="calendar"></div>
-						 <br/>
+
 
 			
                      </div>
@@ -229,7 +229,8 @@ $a = new ActividadDB();
  	<?php require 'templates/generalJs.html';?>
  	<?php require '../assets/plugins/evocalendar/php/actCalendar.php';?>	
 
-	<!-- Kanban Menu -->	
+	<!-- Kanban Menu -->
+	<script type="text/javascript"> var act = <?= $_GET['act'];?> </script>
 	<script type="module" src="../assets/plugins/kanban/js/kanban-main.js"></script>	
 	
    <!-- Evo Calendar -->		

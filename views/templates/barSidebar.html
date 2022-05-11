@@ -74,13 +74,21 @@
 
 				<?php endif;
 					  
-                foreach (($g -> getActividadesUsuario($IdUsu)) as $activ): ?>
+                foreach (($g -> getActividadesUsuario($IdUsu)) as $activ): 
+					if (strnatcasecmp($_SERVER["REQUEST_URI"],"/timesupp/views/actividad.php?act=$activ[IdAct]") == 0): ?>
  
                     <ul class="treeview-menu">
-                        <li><a class="waves-effect waves-dark" href="../views/actividad.php?act=<?= $activ['IdAct']; ?>"><i class="icon-arrow-right"></i><?= $activ['Nombre']; ?> </a></li>
+                        <li class="active"><a class="waves-effect waves-dark" href="../views/actividad.php?act=<?= $activ['IdAct']; ?>"><i class="icon-arrow-right"></i><?= $activ['Nombre']; ?> </a></li>
                     </ul>
 					  
-				<?php endforeach; ?>
+				<?php else: ?> 
+					  
+                    <ul class="treeview-menu">
+                        <li><a class="waves-effect waves-dark" href="../views/actividad.php?act=<?= $activ['IdAct']; ?>"><i class="icon-arrow-right"></i><?= $activ['Nombre']; ?> </a></li>
+                    </ul>					  
+					  
+				<?php endif;
+					endforeach; ?>
 					  
                   </li>
 

@@ -6265,6 +6265,12 @@ svg#sun {
   min-height: 720px;
 }
 
+.cardB2-responsive{
+  overflow-y:auto;
+  overflow-x: hidden;
+	
+}
+
 /* Foto de Perfil*/
 
 .profile-pic{
