@@ -46,6 +46,7 @@
 	background: linear-gradient(to right, #2563eb 60%, #60a5fa );
 	border-style: none;
 	border-radius: 5px;
+	cursor: pointer;
 
 	/* Flecha select fuera*/
 	-webkit-appearance: none;
@@ -141,7 +142,6 @@
 	margin-bottom: 0;
 	background: white;
 	border-radius: 5px;
-	cursor: pointer;
 }
 
 .select-items div, .select-selected {

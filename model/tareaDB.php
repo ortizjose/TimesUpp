@@ -103,6 +103,18 @@ class TareaDB {
 		else:
 			return false;
 		endif;
+	}
+	
+	
+	public function borrarTarea($idTarea)
+	{
+		$sentence = $this -> dbc->prepare("DELETE FROM TAREA WHERE IdTarea = $idTarea;");
+
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;
+		endif;
 	}	
 	
 }

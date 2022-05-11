@@ -6,8 +6,6 @@ import Modal from "./Modal.js";
 export default class Item {
 	constructor(id, content, priority) {
 		const bottomDropZone = DropZone.createDropZone();
-		//debugger;	
-		//const ModalButton = new Modal(id, content);
 
 		this.elements = {};
 		this.elements.root = Item.createRoot();
@@ -18,9 +16,7 @@ export default class Item {
 		this.elements.buttonColum2 = this.elements.root.querySelector(".button-2");
 		this.elements.buttonColum3 = this.elements.root.querySelector(".button-3");
 
-
-
-
+		
 		this.elements.root.dataset.id = id;
 		this.elements.input.textContent = content;
 		this.elements.select.value = priority;
@@ -41,32 +37,39 @@ export default class Item {
 			this.content = newContent;
 			this.priority = newPriority;
 
-			console.log("ENVIADO: "+id+" || "+this.content+" || "+{priority: this.priority});
-
 			KanbanAPI.updateItem(id, {content: this.content}, {priority: this.priority});
 		};
 
 		this.elements.input.addEventListener("blur", onBlur);
 		this.elements.select.addEventListener("click", onBlur);
+		
+
+		
+		/* ### START DESKTOP EVENTS ### */		
 		this.elements.root.addEventListener("dblclick", () => {
 
-		var modalButton = new Modal(id, content);
+
+		var modalButton = new Modal(id, this.content);
 		document.querySelector('body').appendChild(modalButton.elements.root);
 		modalButton.elements.root.classList.add('show');
 		var acceptModal = document.querySelector("#acceptModal-"+id);
 		createAcceptEventListener(acceptModal, modalButton.elements.root, this.elements.input, this.elements.root );
 
 
-			/*const check = confirm("Are you sure you want to delete this item?");
-
-			if (check) {
-				KanbanAPI.deleteItem(id);
-
-				this.elements.input.removeEventListener("blur", onBlur);
-				this.elements.root.parentElement.removeChild(this.elements.root);
-			}*/
+		});
+		
+		
+		this.elements.root.addEventListener("dragstart", e => {
+			e.dataTransfer.setData("text/plain", id);
 		});
 
+
+		this.elements.input.addEventListener("drop", e => {
+			e.preventDefault();
+		});		
+
+
+		
 		/* ### STAR MOBILE EVENTS ### */
 		var touchstart;
 		var touchend;
@@ -93,10 +96,10 @@ export default class Item {
 			}
 			else if( (touchend - touchstart) > 500 ){ // Pulsacion larga
 
-				const modalButton = new Modal(id, content);
+				var modalButton = new Modal(Number(id), this.content);
 				document.querySelector('body').appendChild(modalButton.elements.root);
 				modalButton.elements.root.classList.add('show');
-				var acceptModal = document.querySelector("#acceptModal-"+id);
+				var acceptModal = document.querySelector("#acceptModal-"+Number(id));
 				createAcceptEventListener(acceptModal, modalButton.elements.root, this.elements.input, this.elements.root );
 
 			}
@@ -143,15 +146,6 @@ export default class Item {
 
 
 
-		/* ### START DESKTOP EVENTS ### */
-		this.elements.root.addEventListener("dragstart", e => {
-			e.dataTransfer.setData("text/plain", id);
-		});
-
-
-		this.elements.input.addEventListener("drop", e => {
-			e.preventDefault();
-		});
 	}
 
 	static createRoot() {
@@ -190,16 +184,38 @@ export default class Item {
 
 		const columns = Array.from(document.querySelectorAll(".kanban__column"));
 		const columnItemSide = columns[column-1].querySelector(".kanban__column-items");
-		const columItems =  Array.from(columns[column-1].querySelectorAll(".kanban__item"));
+		const columnItems =  Array.from(columns[column-1].querySelectorAll(".kanban__item"));
 
 		
-		columnItemSide.after(columItems[columItems.length-1] ,itemFragment);
-		columMobile.style.display = "none";
 
+		const idOrder = [ ];
+		var mismaColumna =  0;
+
+		let j = 0;
+		for(let i = 0; i< columnItems.length; i++) { 
+			//debugger;
+
+			if ( itemId != Number(columnItems[i].dataset.id) ) {
+
+				idOrder[j] = Number(columnItems[i].dataset.id);
+				j++;
+			}
+			else{
+				return;
+			}
+			
+		}
+		// Añadimos el nuevo Item la ultima posicion 
+		idOrder.push(itemId);
+		
+		
+		columnItemSide.after(columnItems[columnItems.length-1] ,itemFragment);
+		columMobile.style.display = "none";
+		
 		KanbanAPI.updateItem(itemId,{
 				columnId: column,
 				position: colPos
-			});
+			}, idOrder);
 
 	}
 }

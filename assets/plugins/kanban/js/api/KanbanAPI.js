@@ -22,7 +22,7 @@ export default class KanbanAPI {
 		const data = read();
 		const column = data.find(column => column.id == columnId);	
 	
-		const idTarea = saveNew(data, column.id);
+		const idTarea = Number(saveNew(data, column.id));
 
 		const item = {
 			id: idTarea,
@@ -39,18 +39,9 @@ export default class KanbanAPI {
 		return item;
 	}
 
-	static updateItem(itemId, newProps, newPriority) {
-		console.log(itemId);		
-		console.log(" || ");		
-		console.log(newProps);
-		console.log(" || ");
-		console.log(newPriority);
-		
-		//Probablemente esto sea debido a que se necesita guardar antes la info en BBDD
-		
+	static updateItem(itemId, newProps, newPriority) {	
 		const data = read();
-		console.log(data);
-		//debugger;
+
 		const [item, currentColumn] = (() => {
 			for (const column of data) {
 				const item = column.items.find(item => item.id == itemId);
@@ -65,15 +56,14 @@ export default class KanbanAPI {
 		if (!item) {
 			throw new Error("Item not found.");
 		}
-		//debugger;
-		item.content = newProps.content === undefined ? item.content : newProps.content;
 
-		if (newPriority != null ){
+		item.content = newProps.content === undefined ? item.content : newProps.content;
+		
+		if (!Array.isArray(newPriority) ){
 			item.priority = newPriority.priority;
 			
-			// Update Content and Priority on BBDD
-			console.log("SAVE_CONT");			
-			save(itemId, newProps.content, newPriority.priority);
+			// Update Content and Priority on BBDD		
+			update(itemId, newProps.content, newPriority.priority);
 		}
 
 		// Update column and position
@@ -94,10 +84,8 @@ export default class KanbanAPI {
 			targetColumn.items.splice(newProps.position, 0, item);
 			
 			// Update Position and Column on BBDD
-			console.log("SAVE_POS");
-			save(itemId, newProps.columnId, newProps.position);
+			update(itemId, newProps.columnId, newPriority);
 		}
-
 
 	}
 
@@ -112,7 +100,7 @@ export default class KanbanAPI {
 			}
 		}
 
-		save(data);
+		ajaxCall2("../assets/plugins/kanban/js/api/deleteTarea.php", itemId, "");
 	}
 
 	static getNumItemsCol(itemId, colId) {
@@ -169,40 +157,46 @@ export default class KanbanAPI {
 
 }
 
+
 function saveNew(data, columnId){
 	
 	var url = "../assets/plugins/kanban/js/api/newTarea.php";
 	var colPos = KanbanAPI.getNumItemsCol(1,columnId);
-	console.log("CP: "+colPos)
+
 	let res = ajaxCall2(url, columnId, colPos);
-	console.log(res);
 	
 	return res;
 	
 }
 
 
-function save(idTarea, arg1, arg2) {
+function update(idTarea, arg1, arg2) {
 
-	//Update del Contenido y la Prioridad
 	var url = "../assets/plugins/kanban/js/api/updateTarea.php";
-	let res = ajaxCall3(url, idTarea, arg1, arg2);	
-	debugger;
-	console.log("RETURN:"+res);
-
 	
-}
+	//Update de la Columna y Posicion	
+	if (Array.isArray(arg2)) {
+		
+		for ( let i = 0; i < arg2.length; i++) {
 
+			ajaxCall3(url, arg2[i], arg1, i);	
+		}	
+		
+	//Update del Contenido y la Prioridad		
+	}else { 
+	
+		ajaxCall3(url, idTarea, arg1, arg2);
+	}		
+}
 
 
 function read() {
  
 	var url = "../assets/plugins/kanban/js/api/getTareas.php";
 	let res = ajaxCall1(url);
-	//console.log(res);
 	
 	return JSON.parse(res);
-
+	
 }
 
 
@@ -225,8 +219,7 @@ function ajaxCall1(url){
 
 
 function ajaxCall2(url, arg2, arg3){
-
-	console.log("URL: "+ url);
+	
 	var http = new XMLHttpRequest();
 
 	//El "act" se lo pasamos en las declaraciones de codigo de php
@@ -235,7 +228,6 @@ function ajaxCall2(url, arg2, arg3){
 
 	if(http.status == 200) {
 		
-		console.log("RES :"+http.responseText);
 		return http.responseText;
 	}
 
@@ -243,9 +235,9 @@ function ajaxCall2(url, arg2, arg3){
 	  
 }
 
+
 function ajaxCall3(url, idTarea, arg1, arg2){
 
-	console.log("URL: "+ url);
 	var http = new XMLHttpRequest();
 
 	//El "act" se lo pasamos en las declaraciones de codigo de php
@@ -254,7 +246,6 @@ function ajaxCall3(url, idTarea, arg1, arg2){
 
 	if(http.status == 200) {
 		
-		console.log("RES :"+http.responseText);
 		return http.responseText;
 	}
 

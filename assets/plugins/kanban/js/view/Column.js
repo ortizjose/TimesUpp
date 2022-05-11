@@ -19,6 +19,7 @@ export default class Column {
 
 		this.elements.addItem.addEventListener("click", () => {
 			
+			//console.log(typeof(id));
 			const newItem = KanbanAPI.insertItem(id, "");
 
 			this.renderItem(newItem);
