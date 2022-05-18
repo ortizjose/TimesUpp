@@ -72,16 +72,16 @@ class EventoDB {
 	}	
 
 	
-	public function anadirEvento($nombre, $etiqueta, $descrip, $fecha, $fechafin, $idUsu, $idAct, $grupal)
+	public function anadirEvento($nombre, $descrip, $fecha, $fechafin, $idUsu, $idAct, $grupal)
 	{
 		if (empty($fechafin)):
 
 			$peticion="INSERT INTO EVENTOS (IdEve, Nombre, Etiqueta, Descripcion, Fecha, FechaFin, IdUsu, IdAct, Grupal) 
-						VALUES(NULL,'$nombre', '$etiqueta', '$descrip', '$fecha', NULL, '$idUsu', '$idAct', '$grupal')";
+						VALUES(NULL,'$nombre', (SELECT UPPER(SUBSTRING(Nombre,1,5)) FROM ACTIVIDAD WHERE IdAct =$idAct), '$descrip', '$fecha', NULL, '$idUsu', '$idAct', '$grupal')";
 		else:
 		
 			$peticion="INSERT INTO EVENTOS (IdEve, Nombre, Etiqueta, Descripcion, Fecha, FechaFin, IdUsu, IdAct, Grupal) 
-						VALUES(NULL,'$nombre', '$etiqueta', '$descrip', '$fecha', '$fechafin', '$idUsu', '$idAct', '$grupal')";	
+						VALUES(NULL,'$nombre', (SELECT UPPER(SUBSTRING(Nombre,1,5)) FROM ACTIVIDAD WHERE IdAct =$idAct), '$descrip', '$fecha', '$fechafin', '$idUsu', '$idAct', '$grupal')";	
 		endif;
 
 		$sentence = $this -> dbc->prepare($peticion);
@@ -106,7 +106,7 @@ class EventoDB {
 	}
 		
 
-	public function getEventosActividad($idAct)
+	public function getEventosActividad($idUsu, $idAct)
 	{
 		$eventos = array();
 
@@ -114,10 +114,7 @@ class EventoDB {
 		
 		$sentence = $this -> dbc->prepare("SELECT eventos.IdEve, eventos.Nombre, eventos.Etiqueta, eventos.Descripcion, 
 											DATE_FORMAT(eventos.Fecha, '%m-%d-%Y') AS Fecha, DATE_FORMAT(eventos.FechaFin, '%m-%d-%Y') AS FechaFin  
-											FROM EVENTOS WHERE IdUsu = '$idUsu' OR (Grupal=1 AND IdAct = ANY 
-												(SELECT actividad.IdAct FROM ACTIVIDAD LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo 
-												LEFT JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE actividad.IdUsu = '$idUsu' 
-												OR usuariogrupo.IdUsu = '$idUsu'));");
+											FROM EVENTOS WHERE (IdUsu = '$idUsu' AND IdAct = '$idAct') OR (Grupal=1 AND IdAct = '$idAct');");
 
 		if ($sentence->execute()): 
 			while ($row = $sentence->fetch()):

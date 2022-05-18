@@ -1,10 +1,8 @@
  <?php 
 include '..\controller\sessionBean.php';
 include '..\model\eventoDB.php';
-include '..\model\usuarioDB.php';
 $s = new SessionBean();
 $e = new EventoDB();
-$u = new usuarioDB();
 
 	$idUsu = $s -> getIdActualUsuario();
 
@@ -13,11 +11,15 @@ $u = new usuarioDB();
         die();
     }
 
+
     if ( !empty($_POST['eventoNombre']) ){
 		
+		$idAct = $_POST['eventoActividad'];
+		print_r($idAct);
 		if ( $_POST['eventoFecha1'] > $_POST['eventoFecha2'] && !empty($_POST['eventoFecha2'])):
 
-			header('Location: ..\views\index.php?evento=-1');
+			header('Location: ..\views\actividad.php?act='.urlencode($idAct).'&evento=-1');
+		
 		elseif (!empty($_POST['eventoGrupal'])):
 
 			$_POST['eventoGrupal']= 1;
@@ -29,22 +31,11 @@ $u = new usuarioDB();
 		$res = $e -> anadirEvento($_POST['eventoNombre'], $_POST['eventoDescrip'], $_POST['eventoFecha1'], $_POST['eventoFecha2'], $idUsu, $_POST['eventoActividad'], $_POST['eventoGrupal']);
 		
 		if($res):			
-				header('Location: ..\views\index.php?evento=1');
+				header('Location: ..\views\actividad.php?act='.urlencode($idAct).'&evento=1');
 		else:
 				header('Location: ..\views\error.php');
 		endif;
 
 		
     }
-
-  	elseif ( !empty($_GET['nota']) ){
-	  
-	  
-	  echo "PHP:".$_GET['nota'];
-		
-		$u -> actualizarNotaRapida( $idUsu, $_GET['nota'] );
-	  
-	  
-	  
-  	}
  ?>

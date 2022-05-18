@@ -5,7 +5,7 @@
    <div class="wrapper">
       <!-- Navbar-->
       <header class="main-header-top hidden-print">
-         <a href="../views/index.php" class="logo"><img class="img-fluid able-logo" src="../assets/images/logo.png" alt="Theme-logo"></a>
+         <a href="../views/index.php" class="logo"><img class="img-fluid able-logo" src="../assets/images/tslogo.png" alt="Theme-logo"></a>
          <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#!" data-toggle="offcanvas" class="sidebar-toggle"></a>
@@ -19,7 +19,7 @@
                         <span class="dropdown-user">Bienvenido, <b> <?= $s->getActualUsuario(); ?> </b> <i class=" icofont icofont-simple-down"></i></span>
                      </a>
                      <ul class="dropdown-menu settings-menu">
-                        <li><a href="#!"><i class="icon-settings"></i> Ajustes</a></li>
+                        <li><a href="../views/ayuda.php"><i class="icon-support"></i> Ayuda </a></li>
                         <li><a href="../views/perfil.php"><i class="icon-user"></i> Mi Perfil</a></li>
 						<li><a href="../views/contactos.php"><i class="icon-notebook"></i> Contactos</a></li>
                         <li class="p-0">
@@ -57,7 +57,7 @@
 				<?php endif;?>
 
                     <a class="waves-effect waves-dark" href="../views/index.php">
-                        <i class="icon-speedometer" ></i><span> Dashboard</span>
+                        <i class="icon-speedometer" ></i><span> Dashboard </span>
                     </a>                
                 </li>
 
@@ -66,11 +66,11 @@
 				<?php if (!strpos($_SERVER["REQUEST_URI"],"actividad.php") == 0):
 					?> 
 
-                  <li class="active treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-docs"></i><span>Actividades</span><i class="icon-arrow-down"></i></a>
+                  <li class="active treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-rocket"></i><span>Actividades</span><i class="icon-arrow-down"></i></a>
                 
 				<?php else:?>
 					  
-                  <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-list"></i><span>Actividades</span><i class="icon-arrow-down"></i></a>
+                  <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-rocket "></i><span>Actividades</span><i class="icon-arrow-down"></i></a>
 
 				<?php endif;
 					  
@@ -95,7 +95,7 @@
 
 
 				<!-- Colorea el elemento o no, si está en la pagina del elemento -->
-				<?php if (strnatcasecmp($_SERVER["REQUEST_URI"],"/timesupp/views/XXXX.php") == 0):?>
+				<?php if ( !strpos($_SERVER["REQUEST_URI"],"grupo.php") == 0):?>
 				
                   <li class="active treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-docs"></i><span>Grupos</span><i class="icon-arrow-down"></i></a>
 					  
@@ -104,13 +104,22 @@
                   <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-people"></i><span>Grupos</span><i class="icon-arrow-down"></i></a>
 				<?php endif;
 					  
-                foreach (($g -> getGruposUsuario($IdUsu)) as $grup): ?>
+                foreach (($g -> getGruposUsuario($IdUsu)) as $grup): 
+					if (strnatcasecmp($_SERVER["REQUEST_URI"],"/timesupp/views/grupo.php?grupo=$grup[IdGrupo]") == 0): ?>
 
+                    <ul class="treeview-menu">
+                        <li class="active"><a class="waves-effect waves-dark" href="../views/grupo.php?grupo=<?= $grup['IdGrupo']; ?>"><i class="icon-arrow-right"></i> <?= $grup['Nombre']; ?> </a></li> 
+                    </ul>
+					  
+				<?php else: ?> 					  
+					  
+					  
                     <ul class="treeview-menu">
                         <li><a class="waves-effect waves-dark" href="../views/grupo.php?grupo=<?= $grup['IdGrupo']; ?>" ><i class="icon-arrow-right"></i> <?= $grup['Nombre']; ?> </a></li>               
                     </ul>
 
-				<?php endforeach; ?>
+				<?php endif;
+					endforeach; ?>
 					  
                   </li>
 
@@ -129,41 +138,7 @@
 				<?php endif; ?>
 					  
                     <a class="waves-effect waves-white" href="../views/admActividad.php">
-                        <i class="icon-pencil" ></i><span> Administrar Actividades </span>
-                    </a>                
-                </li>
-
-
-				<!-- Colorea el elemento o no, si está en la pagina del elemento -->
-				<?php if (strnatcasecmp($_SERVER["REQUEST_URI"],"/timesupp/views/XXXX.php") == 0):?>
-				
-                  <li class="active treeview">
-					  
- 				<?php else: ?>
-					  
-                  <li class="treeview">
-					  
-				<?php endif; ?>
-					  
-                    <a class="waves-effect waves-dark" href="../views/loquesea.php">
-                        <i class="icon-note" ></i><span> Crear Tarea </span>
-                    </a>                
-                </li>
-
-
-				<!-- Colorea el elemento o no, si está en la pagina del elemento -->
-				<?php if (strnatcasecmp($_SERVER["REQUEST_URI"],"/timesupp/views/XXXX.php") == 0):?>
-				
-                  <li class="active treeview">
-					  
- 				<?php else: ?>
-					  
-                  <li class="treeview">
-					  
-				<?php endif; ?>
-					  
-                    <a class="waves-effect waves-dark" href="../views/loquesea.php">
-                        <i class="icon-clock" ></i><span> Crear Recordatorio </span>
+                        <i class="icon-pencil" ></i><span> Editar Actividades </span>
                     </a>                
                 </li>
 

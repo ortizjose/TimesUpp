@@ -26,8 +26,8 @@ $s = new SessionBean();
 	<meta name="author" content="codedthemes">
 
 	<!-- Favicon icon -->
-	<link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-	<link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../assets/images/tsicon2.png" type="image/x-icon">
+	
 
 	<!-- Google font-->
    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
@@ -72,7 +72,7 @@ $s = new SessionBean();
 				<div class="login-card card-block">
 					<form class="md-float-material" action="../controller/loginController.php" method="post">
 						<div class="text-center">
-							<img src="../assets/images/logo-black.png" alt="logo">
+							<img src="../assets/images/tslogo-black.png"  width="55%"> 
 						</div>
 						<h3 class="text-center txt-primary">
 							Iniciar sesión en su cuenta
@@ -157,19 +157,6 @@ $s = new SessionBean();
 	<!-- end of container-fluid -->
 </section>
 
-
-<!-- Required Jqurey -->
-<script src="assets/plugins/jquery/dist/jquery.min.js"></script>
-<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="assets/plugins/tether/dist/js/tether.min.js"></script>
-
-<!-- Required Fremwork -->
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- waves effects.js -->
-<script src="assets/plugins/Waves/waves.min.js"></script>
-<!-- Custom js -->
-<script type="text/javascript" src="assets/pages/elements.js"></script>
 
 
 

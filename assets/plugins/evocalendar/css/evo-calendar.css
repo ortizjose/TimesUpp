@@ -425,6 +425,21 @@ tr.calendar-body .calendar-day .day[disabled] {
     transform: translateY(-50%);
 }
 
+.event-container > .event-info > p.event-title > a {
+    position: absolute;
+    top: 150%;
+    right: 0;
+    font-size: 12px;
+    font-weight: normal;
+    color: #755eb5;
+    border: 1px solid #755eb5;
+    border-radius: 3px;
+    background-color: rgb(237 234 246);
+    padding: 3px 6px;
+    transform: translateY(-50%);
+}
+
+
 .event-container > .event-info > p.event-title2 {
     position: relative;
     font-size: 15px;

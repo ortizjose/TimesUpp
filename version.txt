@@ -74,17 +74,15 @@ COSAS PENDIENTES
 
 *GENERICO
 - Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones. Cuando se repliega el navbar y se quiere seleccionar la casilla de Actividades o Grupos no funciona como deberia. 
+- Tooltip para todo.
+- Mensajes cuando empty para todo
+
 
 *ACTIVIDAD
-- Meter en Actividad idGrupo como FK y tirar de idGrupo o idUsu según sea grupal o no
-- El input de selección de grupo hay que revisar que le pasa en el css con un @media de 544px.
+- Mostrar grupo al que pertenece
 
 *GRUPOS
-- Revisar la adaptación del selectable multiple de crear grupo.
-- Revisar el selectable de modificar grupo para que a partir de dos personas cuente en vez de mostrar, o se adapte.
-- Integrantes del crear no se muestra correctamente con varias pestañas
-- Al pulsar crear actividad se le puede pasar por post una variable para que se seleccione directamente el grupo en el "crear actividad".
-
+- Botones que redirijan a la actividad correspondiente
 
 *CONTACTOS
 - Quitar la opción de poder añadirte a ti mismo.
@@ -98,21 +96,15 @@ COSAS PENDIENTES
 - Colores personalizados para los eventos
 - Poner height en card de Mayo/Octubre
 
+*TAREAS
+- 
+
 *USUARIO
 - Descomentar el control de tiempo de Sesión en SessionBean cuando se termine.
 
 /////////////////////////////////////////////////////////////////////////////////
 DUDAS
-- No hay distincion en minus/mayus a la hora de comprobar usuarios/correos en inicio de sesión, cambio de Correo, etc.
-- Control de sesion por tiempo ahora mismo esta quitado, pero en el momento que lo pongamos otra vez ¿Tiempo ilimitado a la hora de que seleccionemos el "Recuerdame" del login?
 
-
-
-DUDAS RESUELTAS
-- Poner el "Usuario" en mas informacion de los contactos? Se muestra el usuario y se ha cambiado la estetica de muestra de informacion
-- ¿Que os parecen los 4 casos de "Añadir nuevo Contacto" seguidos en el codigo html? Cambiado a switch/case
-- Cuando se comprueba si hay contactos pendientes, se tira de la misma funcion que de traer toda la lista de contactos pendientes ¿Carmbiar verdad? Se ha metido en variable
-- Los integrantes que se modifican en los grupos son solo los integrantes que son contactos y podemos añadir otros contactos, pero aquellos que no lo sean no nos apareceran, es decir, josemota no es nuestro contacto, esta en Clase pero no lo podemos modificar.
 
 
 

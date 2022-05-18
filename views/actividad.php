@@ -3,10 +3,12 @@ include '..\controller\sessionBean.php';
 include '..\model\genericDB.php';
 include '..\model\eventoDB.php';
 include '..\model\actividadDB.php';
+include '..\model\grupoDB.php';
 $s = new SessionBean();
 $g = new GenericDB();
 $e = new EventoDB();
 $a = new ActividadDB();
+$gr = new GrupoDB();
   
   $IdUsu = $s -> getIdActualUsuario();
 
@@ -15,6 +17,8 @@ $a = new ActividadDB();
 	}
 
 	$actividad = $a -> getActividad($_GET['act']);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -84,13 +88,10 @@ $a = new ActividadDB();
                         <h5 class="card-header-text">Calendario: <?= $actividad[0]['Nombre'] ?></h5>
                      </div>
 
-                    <div class="CardB1-responisve">
+                    <div class="CardB1-responsive">
                      <div class="card-block">
-						
 
 						<div id="calendar"></div>
-
-
 			
                      </div>
                   </div>
@@ -108,19 +109,12 @@ $a = new ActividadDB();
                        
                      <div class="CardM2-responsive">
 					  <div class="card-block">
-					   <form action="../controller/indexController.php" method="post">
+					   <form action="../controller/actividadController.php" method="post">
 
 						  <div class="form-group row">
 							 <label for="h-nombre" class="col-md-3 col-form-label form-control-label">Nombre</label>
 							 <div class="col-md-9">
 								<input type="text" id="h-nombre" name="eventoNombre" class="form-control" placeholder="Nombre del Evento" required>
-							 </div>
-						  </div>
-
-						  <div class="form-group row">
-							 <label for="h-nombre" class="col-md-3 col-form-label form-control-label">Etiqueta</label>
-							 <div class="col-md-9">
-								<input type="text" id="h-nombre" name="eventoEtiqueta" class="form-control" placeholder="Etiqueta" required>
 							 </div>
 						  </div>
 						   
@@ -131,20 +125,6 @@ $a = new ActividadDB();
 							 </div>
 						  </div>
 						   
-						  <div class="form-group row">
-							 <label class="col-md-3 col-form-label form-control-label">Añadir a</label>
-							 <div class="col-md-9">
-								<select class="form-control" name="eventoActividad" id="eventoActividad" required>
-									<option value="" selected>Ninguno</option>
-									
-									<?php foreach(($g -> getActividadesUsuario($IdUsu)) as $actividad ):?>
-										<option value="<?= $actividad['IdAct'] ?>"> <?= $actividad['Nombre'] ?> </option>	
-									<?php endforeach; ?>
-									
-								</select>
-							 </div>
-						  </div>
-						
 						  <div class="form-group row">
 							<label for="h-nombre" class="col-md-4 col-form-label form-control-label">Fecha Inicial</label>
 							<div class="col-md-8">  
@@ -166,14 +146,14 @@ $a = new ActividadDB();
 							</div>
 						    <div class="col-md-2 col-xs-2">
 								<label class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" name="eventoGrupal" id="eventoGrupal" disabled>
+									<input type="checkbox" class="custom-control-input" name="eventoGrupal" id="eventoGrupal">
 									<span class="custom-control-indicator"></span>
 								</label>
 						   </div>						  
 							  
 						
 							 <div class="col-md-6 col-xs-6 text-right" >
-								<button type="submit" class="btn btn-info btn-md waves-effect waves-light">Crear</button>
+								<button type="submit" name="eventoActividad" value="<?= $_GET['act']?>" class="btn btn-info btn-md waves-effect waves-light">Añadir</button>
 							 </div>
 						  </div>
 
@@ -187,27 +167,42 @@ $a = new ActividadDB();
                <div class="col-xl-3 col-lg-12">
                   <div class="card">
                      <div class="card-header">
-                        <h5 class="card-header-text">Actividades</h5>
+                        <h5 class="card-header-text"> Pertenece a </h5>
                      </div>
 
                       <div class="CardS2">
+						  
+					  	<?php if( !empty($actividad[0]['IdUsu']) ):?>
+						  
+						  <div class="col-md-12" style="text-align: center;">
+							<span style="font-size: 50px; color: #3D505A;" ><i class="icofont icofont-space "></i></span>							  
+						 	<h4> Actualmente estás solo ante este proyecto espacial. </h4>
 
-                        <div class="card-block button-list">
+						  </div>
+						  
+						<?php else: ?>  
+						  
+						  
+                          <div class="card-block col-md-12">
+							  
+							<form action="grupo.php?grupo=<?= $actividad[0]['IdGrupo'] ?>" method="POST">							 
+							  <button type="submit" class=" btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para abrir el grupo"> 
+							  <?php $grupo= $gr -> getGrupo($actividad[0]['IdGrupo']); echo $grupo[0]['Nombre']; ?>
+							  </button>
+							</form>
+                          </div>
+						  
+						  <div class="col-md-12" style="text-align: center;">						  
+						    <h4>Todos los tripulantes de este grupo tendrán acceso a ella.</h4>
+						  </div>						  
+						  
+						  
+						  
+					  	<?php endif; ?>
+						  
+						  
 
-						<?php foreach (($g -> getActividadesUsuario($IdUsu)) as $actividad): ?>
 
-							<button type="button" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para ir a al apartado de la actividad"> 
-							<?= $actividad['Nombre'] ?>
-							</button>
-							
- 						<?php endforeach; ?>
-
-                           <button type="button" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title=".btn-info .btn-block"> Primera Opcion
-                                </button>
-                           <button type="button" class="btn btn-inverse-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title=".btn-inverse-info ">Segunda Opcion
-                                </button>
-
-                        </div>
 
 
                      </div>

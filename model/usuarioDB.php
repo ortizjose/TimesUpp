@@ -203,6 +203,19 @@ class UsuarioDB {
 	
 	}
 
+	public function actualizarNotaRapida($idUsu, $Contenido)
+	{
+
+		$sentence = $this -> dbc->prepare("UPDATE USUARIO SET NotaRapida='$Contenido' WHERE IdUsu = $idUsu");
+
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;
+		endif;
+	
+	}	
+	
 	public function getNumContactos($idUsu)
 	{
 		//$num = array();

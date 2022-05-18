@@ -1,14 +1,12 @@
 <script>
-
+	
 // initialize your calendar, once the page's DOM is ready
 $(document).ready(function() {
 		
 	
-	
-	
 	var eventos = [];
 
-	<?php foreach ($e -> getEventos($IdUsu) as $evento ): 
+	<?php foreach ($e -> getEventosActividad($IdUsu, $_GET['act']) as $evento ): 
 		if ( empty ($evento['FechaFin'])):
 	?>
 
@@ -52,14 +50,14 @@ $(document).ready(function() {
 	//$('#calendar').evoCalendar('addCalendarEvent',eventos);
 
 	//Boton "Añadir a" habilita la opción de "Evento Grupal" cuando se selecciona una Actividad.
-	document.getElementById("eventoActividad").onchange = function(){
+	/*document.getElementById("eventoActividad").onchange = function(){
 
 		if ( Number( document.getElementById("eventoActividad").value ) )
 			document.getElementById('eventoGrupal').disabled = false;
 		else 
 			document.getElementById('eventoGrupal').disabled = true;
 
-	};
+	};*/
 
 
 	

@@ -28,6 +28,7 @@ class SessionBean{
         $_SESSION['Start']= time();
         $_SESSION['Expire'] = $_SESSION['Start'] + (30*60);
 		$_SESSION['Foto'] = $usuarioActual[0]['Foto']; 
+		$_SESSION['Nota'] = $usuarioActual[0]['NotaRapida'];
 		
     }
 
@@ -47,6 +48,10 @@ class SessionBean{
 	
 	public function getFotoActualUsuario(){
 		return $_SESSION['Foto'];
+	}
+	
+	public function getNotaActualUsuario(){
+		return $_SESSION['Nota'];
 	}
 	
 	public function setFotoActualUsuario($foto){

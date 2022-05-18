@@ -7,6 +7,7 @@ $g = new GenericDB();
 $e = new EventoDB();
   
   $IdUsu = $s -> getIdActualUsuario();
+  $Usuario = $g -> getUsuario($IdUsu);
 
     if ( !isset($_SESSION['Usuario'])){
     	header('Location: ..\views\login.php');  
@@ -56,12 +57,11 @@ $e = new EventoDB();
                         <h5 class="card-header-text">Calendario</h5>
                      </div>
 
-                    <div class="CardB1-responisve">
+                    <div class="CardB1-responsive">
                      <div class="card-block">
 						
-						<br/> 
 						<div id="calendar"></div>
-						 <br/>
+
 
 			
                      </div>
@@ -86,13 +86,6 @@ $e = new EventoDB();
 							 <label for="h-nombre" class="col-md-3 col-form-label form-control-label">Nombre</label>
 							 <div class="col-md-9">
 								<input type="text" id="h-nombre" name="eventoNombre" class="form-control" placeholder="Nombre del Evento" required>
-							 </div>
-						  </div>
-
-						  <div class="form-group row">
-							 <label for="h-nombre" class="col-md-3 col-form-label form-control-label">Etiqueta</label>
-							 <div class="col-md-9">
-								<input type="text" id="h-nombre" name="eventoEtiqueta" class="form-control" placeholder="Etiqueta" required>
 							 </div>
 						  </div>
 						   
@@ -159,26 +152,13 @@ $e = new EventoDB();
                <div class="col-xl-3 col-lg-12">
                   <div class="card">
                      <div class="card-header">
-                        <h5 class="card-header-text">Actividades</h5>
+                        <h5 class="card-header-text">Nota Rápida</h5>
                      </div>
 
                       <div class="CardS2">
 
-                        <div class="card-block button-list">
-
-						<?php foreach (($g -> getActividadesUsuario($IdUsu)) as $actividad): ?>
-
-							<button type="button" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para ir a al apartado de la actividad"> 
-							<?= $actividad['Nombre'] ?>
-							</button>
-							
- 						<?php endforeach; ?>
-
-                           <button type="button" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title=".btn-info .btn-block"> Primera Opcion
-                                </button>
-                           <button type="button" class="btn btn-inverse-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title=".btn-inverse-info ">Segunda Opcion
-                                </button>
-
+                        <div class="card-block">
+							<textarea id="notaRapida" class="form-control dark-text-area" rows="6" maxlength="288" data-toggle="tooltip" title="Añada la anotación rápida que desee."><?= $Usuario[0]['NotaRapida'] ?> </textarea>
                         </div>
 
 
@@ -219,7 +199,39 @@ $e = new EventoDB();
 		  }
 		  http.send(null)
 
-	  } 	
+	  } 
+	
+	  //Eventos Nota Rapida
+	  var contNota;
+	  document.getElementById("notaRapida").addEventListener("mouseenter", () => {
+		  
+		  contNota = document.getElementById("notaRapida").value;	  
+	  });	
+					
+	  document.getElementById("notaRapida").addEventListener("mouseleave", () => {
+		  
+		  
+		  if ( contNota != document.getElementById("notaRapida").value ) {
+			  
+			  console.log("DIFERENTES");
+			  
+			  var url = "../controller/indexController.php";
+			  var http = new XMLHttpRequest();
+
+			  http.open("GET", url+"?"+"nota="+document.getElementById("notaRapida").value, true);
+			  http.onreadystatechange = function()
+			  {
+				if(http.readyState == 4 && http.status == 200) {
+				  console.log(http.responseText);
+				}
+			  }
+			  http.send(null)			  
+			 
+		  }
+  	  
+	  });	
+		
+		
 	</script>
 </body>
 

@@ -1126,7 +1126,7 @@ textarea {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #3D505A; }
+  background: rgba(61,80,90,0.8);}
   .error-400 h1,
   .error-403 h1,
   .error-404 h1,
@@ -6195,6 +6195,8 @@ svg#sun {
 }
 
 
+
+
 .addCardTareas{
   overflow-y:hidden;
   overflow-x: hidden;
@@ -6237,7 +6239,7 @@ svg#sun {
 .CardS2{
   overflow-y: hidden;
   overflow-x: hidden;
-  height: 170px;	
+  height: 175px;	
 }
 
 
@@ -6259,15 +6261,15 @@ svg#sun {
   height: 720px;
 }
 
-.CardB1-responisve{
+.CardB1-responsive{
   overflow-y:auto;
   overflow-x: hidden;
   min-height: 720px;
 }
 
-.cardB2-responsive{
+.CardB2-responsive{
   overflow-y:auto;
-  overflow-x: hidden;
+  overflow-x: hidden;	
 	
 }
 
@@ -6336,7 +6338,10 @@ svg#sun {
 	border: 2px solid #3D505A;
 }
 
-
+.dark-text-area{
+	background: #39444E !important; 
+	color: white !important;
+}
 
 /* color css Ends */
 

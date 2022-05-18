@@ -15,7 +15,7 @@ $a = new ActividadDB();
     	header('Location: ..\views\login.php');  
 	}
 
-	$grupo = $gr -> getNombreGrupo($_GET['grupo']);
+	$grupo = $gr -> getGrupo($_GET['grupo']);
 	$actividades = $a -> getActividadesGrupo($_GET['grupo']);
 
 

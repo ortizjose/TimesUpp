@@ -30,13 +30,14 @@ class GrupoDB {
 		return $dbc;
 	}
 
-	public function getNombreGrupo($idGrupo)
+	public function getGrupo($idGrupo)
 	{
+		
 		$grupo = array();
 		$sentence = $this -> dbc->prepare("SELECT * FROM GRUPO WHERE IdGrupo='$idGrupo'");
 		$sentence->execute();
 		$grupo[0]=$sentence->fetch();	
-
+		
 		return $grupo;	
 	}
 

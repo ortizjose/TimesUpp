@@ -688,6 +688,7 @@
 		
         
         if (event_data.badge) markup += '<span>'+event_data.badge+'</span>';
+		//markup += '<a>'+'PRUEBA'+'</a>';
         markup += '</p>'
         if (event_data.description) markup += '<p class="event-desc">'+event_data.description+'</p>';
 
