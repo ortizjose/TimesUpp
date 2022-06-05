@@ -87,7 +87,7 @@ $a = new ActividadDB();
 										</div>
 										
 										<div class="col-md-4" align="center">
-												<img src="../assets/images/help/1.png"  class="img-fluid" alt="">
+												<img src="../assets/images/help/1.png"  class="img-fluid" width="90%">
 										</div>
 										
 									</div>
@@ -157,18 +157,19 @@ $a = new ActividadDB();
 									</br>                       
 									<div class="row">
 										
-										<div class="col-md-7">									
+										<div class="col-md-12">									
 											<p class="text-muted">								
 												Si usted quiere cambiar el email o la contraseña se debe de dirigir a la página de su perfil. En el menú de <strong>Administrar mi perfil</strong>, situado a la derecha, se selecciona la modificación que se quiere realizar. Se introducen los campos que el sistema nos pide, en la ilustración se introduciría el antiguo email y el nuevo, se selecciona la casilla de <strong>Confirmar</strong> y se pulsa el botón de <strong>Cambiar</strong>. Una vez hecho esto, el cambio se aplicará a nuestro perfil.
 											</p>	
 											</br>
 											<p class="text-muted">								
 												 El proceso es exactamente igual con la contraseña, a diferencia que se tiene que introducir la antigua contraseña, y la nueva dos veces para verificar que no se confunde.
-											</p>									
+											</p>
+											</br>
 										</div>
 										
-										<div class="col-md-5">
-											<img src="../assets/images/help/7.png"  class="img-fluid" alt="">
+										<div class="col-md-12" align="center">
+											<img src="../assets/images/help/7.png"  class="img-fluid" >
 										</div>
 
 									</div>
@@ -180,19 +181,20 @@ $a = new ActividadDB();
 									</br>                       
 									<div class="row">
 									
-									<div class="col-md-6">									
+									<div class="col-md-12">									
 										<p class="text-muted">								
 											La diferencia está en lo que se quiere hacer con ese grupo. Si su proposito es salirse de ese grupo para no ver más las actividades que tenía relacionadas con ese grupo, usted debe de seleccionar la opción de <strong>Salir</strong>.
 										</p>	
 										</br>
 										<p class="text-muted">								
 											 En cambio, si usted lo que quiere es eliminar o borrar el grupo lo que conseguirá es que todos los integrantes de ese grupo junto a usted no podáis disfrutar de las actividades relacionadas con ese grupo, por lo que es un cambio que afecta a varios usuarios. Si lo que quiere es eliminar ese grupo con toda la información que conlleva, debe de usar la opción de <strong>Borrar</strong>.
-										</p>									
+										</p>
+										</br>
 									</div>
 										
-									<div class="col-md-6">
-
-											<img src="../assets/images/help/8.png"  class="img-fluid" alt="">
+									<div class="col-md-12" align="center">
+						
+											<img src="../assets/images/help/8.png"  class="img-fluid" >
 									</div>	
 
 										

@@ -128,7 +128,9 @@ class ActividadDB {
 	
 	public function borrarActividad($idAct)
 	{
-		$sentence = $this -> dbc->prepare("DELETE FROM ACTIVIDAD WHERE IdAct = $idAct;");
+		$sentence = $this -> dbc->prepare("DELETE FROM TAREA WHERE IdAct=$idAct;
+										   DELETE FROM EVENTOS WHERE IdAct=$idAct;
+										   DELETE FROM ACTIVIDAD WHERE IdAct = $idAct;");
 
 		if ($sentence->execute()):
 			return true;

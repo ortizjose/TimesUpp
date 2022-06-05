@@ -133,10 +133,12 @@ $a = new ActividadDB();
 						<?php else:
 							foreach ( $actividades as $actividad): ?>
 							
-							<button type="button" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para ir a al apartado de la actividad"> 
-							<?= $actividad['Nombre'] ?>
-							</button>
-							
+								<form action="actividad.php?act=<?= $actividad['IdAct']?>" method="POST">
+									<button type="submit" class="btn btn-info btn-block waves-effect" data-toggle="tooltip" data-placement="top" title="Pulse para ir a al apartado de la actividad"> 
+									<?= $actividad['Nombre'] ?>
+									</button>									
+								</form>
+								</br>
 							
 						<?php endforeach;
 							endif; ?>

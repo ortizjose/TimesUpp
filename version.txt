@@ -69,6 +69,17 @@
 - Funcionalidad de creación hecha.
 - Push a git.
 
+XX/XX/XXXX - ULTIMAS MODIFICACIONES
+- Se ha corregido el poder añadir a tu propio usuario como contacto.
+- Tooltip para todo.
+- Borrar actividad ahora borra eventos y tareas de esa actividad.
+- Borrar grupos con actividades ahora borra actividades y todo lo que ello conlleva.
+- El menu de tareas ya no tiene problema en mostrar incorrectamente el menu para cambiar de columna.
+
+- 
+
+
+
 /////////////////////////////////////////////////////////////////////////////
 COSAS PENDIENTES
 
@@ -76,16 +87,20 @@ COSAS PENDIENTES
 - Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones. Cuando se repliega el navbar y se quiere seleccionar la casilla de Actividades o Grupos no funciona como deberia. 
 - Tooltip para todo.
 - Mensajes cuando empty para todo
+- Mensaje de control para crear evento.
+- No permitir ir a actividades, cambiado el id en los parametros de la url.
 
 
 *ACTIVIDAD
-- Mostrar grupo al que pertenece
+- Al eliminar una tarea, se debe actualizar la posición del resto de tareas. No es necesario porque al modificar se cambia de nuevo todas las posiciones.
+- Tareas que se le añaden solo numeros no se crean bien
+
 
 *GRUPOS
-- Botones que redirijan a la actividad correspondiente
+
 
 *CONTACTOS
-- Quitar la opción de poder añadirte a ti mismo.
+- Al eliminar el contacto, ya no podremos eliminarlo de un grupo. En el caso de que estemos los dos no se podria echar a esa persona.
 
 
 *PERFIL
@@ -95,16 +110,17 @@ COSAS PENDIENTES
 *CALENDARIO
 - Colores personalizados para los eventos
 - Poner height en card de Mayo/Octubre
+- Responsive antes de cierto tamaño
 
-*TAREAS
-- 
 
 *USUARIO
 - Descomentar el control de tiempo de Sesión en SessionBean cuando se termine.
+- Cuando se pulse recuerdame, tiempo de sesion infinito.
+
 
 /////////////////////////////////////////////////////////////////////////////////
 DUDAS
-
+- Al eliminar el contacto, ya no podremos eliminarlo de un grupo. En el caso de que estemos los dos no se podria echar a esa persona.
 
 
 

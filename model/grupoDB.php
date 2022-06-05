@@ -187,16 +187,26 @@ class GrupoDB {
 	
 	public function borrarGrupo($idGrupo)
 	{
-		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo = $idGrupo;");
+		// BORRADO DE LAS ACTIVIDADES RELACIONADAS
+		$sentence = $this -> dbc->prepare("SELECT IdAct FROM ACTIVIDAD WHERE IdGrupo=$idGrupo;");	
+		$sentence->execute();
 
-		if ($sentence->execute()):		
-			$sentence = $this -> dbc->prepare("DELETE FROM GRUPO WHERE IdGrupo = $idGrupo;");
+		while ($row = $sentence->fetch()):
+			$sentence2 = $this -> dbc->prepare("DELETE FROM TAREA WHERE IdAct=$row[0];
+											   DELETE FROM EVENTOS WHERE IdAct=$row[0];
+											   DELETE FROM ACTIVIDAD WHERE IdAct=$row[0];");
+			$sentence2->execute();
 
-			if ($sentence->execute()):
-				return true;
-			else:
-				return false;
-			endif;
+		endwhile;		
+
+		// BORRADO DEL GRUPO
+		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdGrupo = $idGrupo;
+										   DELETE FROM GRUPO WHERE IdGrupo = $idGrupo;");
+		
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;
 		endif;
 
 	}		
@@ -212,7 +222,17 @@ class GrupoDB {
 			return false;
 		endif;
 	
-	}	
+	}
+	
+	public function numeroActividadesGrupo($idGrupo){
+		$sentence = $this -> dbc->prepare("SELECT COUNT(*) FROM ACTIVIDAD WHERE IdGrupo = $idGrupo;");
+
+		$sentence->execute();
+		$grupo=$sentence->fetch();	
+		
+		return $grupo[0];		
+		
+	}
 	
 	
 }

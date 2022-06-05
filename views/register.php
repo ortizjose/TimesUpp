@@ -141,13 +141,6 @@
 									<label>Confirma tu Contraseña</label>
 								</div>
 
-								<div class="rkmd-checkbox checkbox-rotate checkbox-ripple b-none m-b-20">
-									<label class="input-checkbox checkbox-primary">
-										<input type="checkbox" id="checkbox">
-										<span class="checkbox"></span>
-									</label>
-									<div class="captions">Recuerdame</div>
-								</div>
 								<div class="col-xs-10 offset-xs-1">
 									<button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light m-b-20">Registro
 									</button>

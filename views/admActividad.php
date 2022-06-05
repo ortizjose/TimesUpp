@@ -190,14 +190,14 @@ $a = new ActividadDB();
                               <div class="form-group row">
                                  <label for="h-nombre" class="col-md-2 col-form-label form-control-label">Nombre</label>
                                  <div class="col-md-10">
-                                    <input type="text" id="h-nombre" name="nuevaActividad" class="form-control" placeholder="Nombre de la actividad" required>
+                                    <input type="text" id="h-nombre" name="nuevaActividad" class="form-control" placeholder="Nombre de la actividad"  data-toggle="tooltip" data-placement="top" title="Introduzca un nombre para la nueva actividad." required>
                                  </div>
                               </div>
 							   
                               <div class="form-group row">
                                  <label class="col-md-2 col-form-label form-control-label">Grupo</label>
                                  <div class="col-md-10">
-									<select class="form-control" name="grupoNuevaActividad" >
+									<select class="form-control" name="grupoNuevaActividad" data-toggle="tooltip" data-placement="top" title="Seleccione un grupo si quiere que la actividad sea grupal.">
                                             <option value="Ninguno">Ninguno</option>
                                           
                                              <?php foreach (($gr -> getGruposUsuario($IdUsu)) as $grupo): ?>

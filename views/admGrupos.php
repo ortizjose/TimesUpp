@@ -176,16 +176,36 @@ $gr = new GrupoDB();
 										</br>
 										<form action="../controller/admGruposController.php" method="post">
 										  <div class="form-group row">
-											 <label for="example-text-input" class="col-md-6 col-form-label form-control-label">¿Eliminar el grupo " <?= $grupo['Nombre'] ?> " ?</label>
 											  
-											 <div class="col-md-4 text-right">  
-												 <div class="checkbox-color checkbox-danger">
-												  	<input id="checkbox2_<?= $i ?>" type="checkbox" required="required" name="borraGrupo" value="<?= $grupo['IdGrupo'] ?>">
-													  <label for="checkbox2_<?= $i ?>" class="form-control-label text-danger">Confirmar</label>
-												 </div>
-											 
-											 	<button type="submit" class="btn btn-danger waves-effect waves-light">Eliminar</button>
-										     </div>
+											  <?php if ($gr -> numeroActividadesGrupo($grupo['IdGrupo'])!=0):?>
+												 <label for="example-text-input" class="col-md-6 col-form-label form-control-label">El grupo "<?= $grupo['Nombre'] ?>" tiene actividades relacionadas ¿Desea eliminarlo igualmente?</label>
+											  
+												 <div class="col-md-4 text-right">  
+													 <div class="checkbox-color checkbox-danger">
+														<input id="checkbox2_<?= $i ?>" type="checkbox" required="required" name="borraGrupo" value="<?= $grupo['IdGrupo'] ?>">
+														  <label for="checkbox2_<?= $i ?>" class="form-control-label text-danger">Confirmar</label>
+													 </div>
+
+													<button type="submit" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Si eliminas este grupo, el resto de miembros no podrán disfrutar de estas actividades relacionadas.">Eliminar</button>
+												 </div>											  
+											  
+											  
+												  <?php else: ?>
+													 <label for="example-text-input" class="col-md-6 col-form-label form-control-label">¿Eliminar el grupo " <?= $grupo['Nombre'] ?> " ?</label>
+
+												 <div class="col-md-4 text-right">  
+													 <div class="checkbox-color checkbox-danger">
+														<input id="checkbox2_<?= $i ?>" type="checkbox" required="required" name="borraGrupo" value="<?= $grupo['IdGrupo'] ?>">
+														  <label for="checkbox2_<?= $i ?>" class="form-control-label text-danger">Confirmar</label>
+													 </div>
+
+													<button type="submit" class="btn btn-danger waves-effect waves-light">Eliminar</button>
+												 </div>											  
+
+											  
+											  
+											  <?php endif;?>											
+
 										  </div>
 										</form>	
 

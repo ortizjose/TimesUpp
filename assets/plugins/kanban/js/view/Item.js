@@ -166,9 +166,9 @@ export default class Item {
 				<div class="kanban__item-input" contenteditable></div>
 					
 				<div class="kanban__column-select">
-					<button class="kanban__column-button button-1 col-md-3 col-lg-12 col-xl-3">Por Hacer</button>
-					<button class="kanban__column-button button-2 col-md-3 col-lg-12 col-xl-3">Haciendo</button>
-					<button class="kanban__column-button button-3 col-md-3 col-lg-12 col-xl-3">Hecho</button>
+					<button class="kanban__column-button button-1">Por Hacer</button>
+					<button class="kanban__column-button button-2">Haciendo</button>
+					<button class="kanban__column-button button-3">Hecho</button>
 				</div>
 
 			  </div>

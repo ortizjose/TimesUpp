@@ -48,7 +48,6 @@ $gr = new GrupoDB();
 // SALIR GRUPO
 	elseif ( !empty($_POST['salirGrupo']) ){ 
 	
-		//echo "$_POST[borraGrupo]";
 
 		$res =  $gr ->salirGrupo($_POST['salirGrupo'], $idUsu);
 		
@@ -64,7 +63,6 @@ $gr = new GrupoDB();
 // BORRAR GRUPO
 	elseif ( !empty($_POST['borraGrupo']) ){ 
 	
-		//echo "$_POST[borraGrupo]";
 
 		$res =  $gr ->borrarGrupo($_POST['borraGrupo']);
 		
