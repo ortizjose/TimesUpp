@@ -61,10 +61,6 @@ class UsuarioDB {
 			
    	 	}		
 		
-	
-		//$output = implode(',', $output); //para hacer debug de la funcion
-    	//echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-		
 		// Inserción en BBDD del usuario
 		$contrasena=md5($contrasena);	
 		$peticion="INSERT INTO USUARIO (IdUsu, Usuario, Nombre, Contrasena, Email, Foto) VALUES ( NULL, '$usuario', '$nombre', '$contrasena', '$email', '../assets/avatar/default.png')";			
@@ -218,7 +214,7 @@ class UsuarioDB {
 	
 	public function getNumContactos($idUsu)
 	{
-		//$num = array();
+
 		$sentence = $this -> dbc->prepare("SELECT count(*) AS contactos FROM CONTACTOS 
 											WHERE (IdUsu1=$idUsu OR IdUsu2=$idUsu) AND Pendiente=0");
 		$sentence->execute();
@@ -229,7 +225,7 @@ class UsuarioDB {
 	
 	public function getNumActividades($idUsu)
 	{
-		//$num = array();
+		
 		$sentence = $this -> dbc->prepare("SELECT count(*) FROM ACTIVIDAD LEFT JOIN grupo ON actividad.IdGrupo = grupo.IdGrupo LEFT JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE actividad.IdUsu = $idUsu OR usuariogrupo.IdUsu = $idUsu");
 		$sentence->execute();
 		$num=$sentence->fetch();	
@@ -239,7 +235,7 @@ class UsuarioDB {
 	
 	public function getNumGrupos($idUsu)
 	{
-		//$num = array();
+		
 		$sentence = $this -> dbc->prepare("SELECT count(*) AS grupos FROM GRUPO g 
 											JOIN usuariogrupo ug ON ug.IdGrupo = g.IdGrupo 
 											WHERE ug.IdUsu=$idUsu");
@@ -248,6 +244,39 @@ class UsuarioDB {
 
 		return $num[0];
 	}	
+	
+	public function eliminarUsuario($idUsu)
+	{
+		// BORRADO DE LAS ACTIVIDADES INDIVIDUALES Y EVENTOS GRUPALES
+		$sentence = $this -> dbc->prepare("SELECT IdAct FROM ACTIVIDAD WHERE IdUsu=$idUsu;");	
+		$sentence->execute();
+
+		while ($row = $sentence->fetch()):
+			$sentence2 = $this -> dbc->prepare("DELETE FROM TAREA WHERE IdAct=$row[0];
+											    DELETE FROM EVENTOS WHERE IdAct=$row[0];
+											    DELETE FROM ACTIVIDAD WHERE IdAct=$row[0];");
+			$sentence2->execute();
+
+		endwhile;
+		
+	
+		
+		
+
+		// BORRADO DE CONTACTOS, RELACIÓN CON GRUPOS, EVENTOS GRUPALES CREADOS POR EL USUARIO Y USUARIO
+		$sentence = $this -> dbc->prepare("DELETE FROM USUARIOGRUPO WHERE IdUsu = $idUsu;
+										   DELETE FROM CONTACTOS WHERE IdUsu1 = $idUsu OR IdUsu2 = $idUsu;
+										   DELETE FROM EVENTOS WHERE IdUsu= $idUsu;
+										   DELETE FROM USUARIO WHERE IdUsu=$idUsu;");
+		
+		if ($sentence->execute()):
+			return true;
+		else:
+			return false;
+		endif;		
+		
+	}
+	
 	
 	
 	/* #########################################################################
@@ -383,8 +412,7 @@ class UsuarioDB {
 	
 	}	
 	
-	
-	
+
 	
 }
 ?>

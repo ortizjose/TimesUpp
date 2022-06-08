@@ -12,17 +12,21 @@ include '..\model\usuarioDB.php';
 
     if ( !empty($_POST['Usuario']) ){
 
-		$usuario = $_POST['Usuario'];
-		$contrasena = $_POST['Contrasena'];      
+		
 
-		$res = $u->comprobarLogin($usuario, $contrasena);
+
+		$res = $u->comprobarLogin($_POST['Usuario'], $_POST['Contrasena']);
 
 		
 		if(!$res): // Usuario no existe
 			header('Location: ..\views\error.php');
 		
 		elseif( $res == 1 ): // Usuario OK
-			$s->setActualUsuario($usuario);
+			if( !empty($_POST['guardarSesion']) )
+				$s->setActualUsuario($_POST['Usuario'], 1);
+			else
+				$s->setActualUsuario($_POST['Usuario'], 0);
+
 		    header('Location: ..\views\index.php');
 		
 		else:// Usuario no existe o contraseña incorrecta

@@ -11,9 +11,11 @@ $a = new ActividadDB();
 
   	$IdUsu = $s -> getIdActualUsuario();
 
-    if ( !isset($_SESSION['Usuario'])){
+    if ( !isset($_SESSION['Usuario']))
     	header('Location: ..\views\login.php');  
-	}
+
+	if ( !$gr -> perteneceAGrupo($IdUsu, $_GET['grupo']) )
+		header('Location: ..\views\error.php');		
 
 	$grupo = $gr -> getGrupo($_GET['grupo']);
 	$actividades = $a -> getActividadesGrupo($_GET['grupo']);

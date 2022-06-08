@@ -88,9 +88,37 @@ $u = new UsuarioDB();
 		endif;
 
 }
+
+// CERRAR SESIÓN
+    elseif ( !empty($_POST['cerrarSesion']) || !empty($_GET['cerrarSesion']) ){ 
+
+		$s -> closeSession();
+		header('Location: ..\views\login.php');		
+				
+}
+
+// ELIMINAR PERFIL
+    elseif ( !empty($_POST['eliminarPerfil']) ){ 
+
+		echo "BORRAR";
+		
+		$res = $u -> eliminarUsuario($idUsu);
+		
+		
+		if($res):
+			$s -> closeSession();
+			header('Location: ..\views\login.php');
+		else:
+			header('Location: ..\views\error.php');
+		endif;		
+		//$s -> closeSession();
+		//header('Location: ..\views\login.php');		
+				
+}
+
 // ERROR
 	else{
-		
+
 		header('Location: ..\views\error.php');
 		
 	}

@@ -48,7 +48,7 @@ class GrupoDB {
 		$grupos = array();
 		$i = 0;
 
-		$sentence = $this -> dbc->prepare("SELECT grupo.Nombre, grupo.IdGrupo FROM GRUPO INNER JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE usuariogrupo.IdUsu = '$idUsu'");
+		$sentence = $this -> dbc->prepare("SELECT grupo.Nombre, grupo.IdGrupo FROM GRUPO INNER JOIN usuariogrupo ON usuariogrupo.IdGrupo=grupo.IdGrupo WHERE usuariogrupo.IdUsu = '$idUsu' ORDER BY grupo.IdGrupo");
 
 		if ($sentence->execute()):
 			while ($row = $sentence->fetch()):
@@ -234,6 +234,19 @@ class GrupoDB {
 		
 	}
 	
+	public function perteneceAGrupo($idUsu, $idGrupo)
+	{
+
+		$sentence = $this -> dbc->prepare("SELECT * FROM USUARIOGRUPO WHERE IdUsu = $idUsu AND IdGrupo = $idGrupo");
+		$sentence->execute();
+		$res=$sentence->fetch();
+
+		if(!empty($res))
+			return true;
+		else
+			return false;
+			
+	}	
 	
 }
 ?>

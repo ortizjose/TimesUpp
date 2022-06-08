@@ -150,6 +150,43 @@ class ActividadDB {
 		return $actividad;		
 		
 	}
+	
+	public function perteneceAActividad($idUsu, $idAct)
+	{
+		$sentence = $this -> dbc->prepare("SELECT IdUsu, IdGrupo FROM ACTIVIDAD WHERE IdAct = $idAct");
+		$sentence->execute();
+		$actividad=$sentence->fetch();
+		
+		if (!empty($actividad[0])): //Actividad Individual
+			echo "USU:".$actividad[0];
+		
+			if ($idUsu == $actividad[0] ):
+				echo "IGUAL";
+				return true;
+			else:
+				echo "DIFERENTE";
+				return false;
+				
+			endif;
+		
+		else:							//Actividad Grupal
+			echo "GRUPO:".$actividad[1]; 
+		
+			$sentence = $this -> dbc->prepare("SELECT * FROM USUARIOGRUPO WHERE IdUsu = $idUsu AND IdGrupo = $actividad[1]");
+			$sentence->execute();
+			$res=$sentence->fetch();
+		
+			if(!empty($res))
+				return true;
+			else
+				return false;
+			
+		endif;
+		
+		
+		
+		
+	}
 
 	
 	

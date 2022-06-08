@@ -12,13 +12,13 @@ $gr = new GrupoDB();
   
   $IdUsu = $s -> getIdActualUsuario();
 
-    if ( !isset($_SESSION['Usuario'])){
+    if ( !isset($_SESSION['Usuario']))
     	header('Location: ..\views\login.php');  
-	}
+
+	if ( !$a -> perteneceAActividad($IdUsu, $_GET['act']) )
+		header('Location: ..\views\error.php');		
 
 	$actividad = $a -> getActividad($_GET['act']);
-
-
 
 ?>
 <!DOCTYPE html>

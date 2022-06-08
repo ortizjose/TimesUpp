@@ -1,4 +1,4 @@
- <?php 
+<?php 
 include '..\controller\sessionBean.php';
 include '..\model\eventoDB.php';
 include '..\model\usuarioDB.php';
@@ -37,14 +37,9 @@ $u = new usuarioDB();
 		
     }
 
-  	elseif ( !empty($_GET['nota']) ){
+  	elseif ( !empty($_GET['nota']) || $_GET['cambio']==1 ){
 	  
-	  
-	  echo "PHP:".$_GET['nota'];
-		
 		$u -> actualizarNotaRapida( $idUsu, $_GET['nota'] );
-	  
-	  
-	  
+	   
   	}
  ?>

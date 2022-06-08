@@ -966,7 +966,7 @@ button.icon-button > span.chevron-arrow-right {
         padding: 10px;
         width: 40px;
         height: 40px;
-        font-size: 16px;
+        font-size: 14px;
     }
     .event-indicator {
         -webkit-transform: translate(-50%, calc(-100% + -3px));

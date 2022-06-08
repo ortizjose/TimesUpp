@@ -112,7 +112,7 @@ $u = new usuarioDB();
 								</div>
 								<div class="col-lg-4">
 									<div class="p-20 z-depth-left-4 waves-effect" data-toggle="tooltip" data-placement="top" title="Cita de Giuseppe Cocconi">
-										<p class="text-sm-center">La probabilidad de éxito es difícil de estimar, pero si nunca buscamos, la oportunidad de tener éxito es cero.</p>
+										<p class="text-sm-center">La probabilidad de éxito es difícil de estimar, pero si nunca buscamos la posibilidad, el éxito será cero.</p>
 									</div>
 								</div>	
 
@@ -141,13 +141,13 @@ $u = new usuarioDB();
 		 
 								</br>                       
 							   	<div class="row">
-								   <form class="form-inline" action="../controller/logoutController.php">
+								   <form class="form-inline" action="../controller/perfilController.php" method="post">
 									 <div class="col-md-8 col-xs-12 form-group">
 										<label class="form-control-label"> Si desea cerrar sesión, pulse este botón.</label>
 									 </div>
 									 <div class="col-md-4 col-xs-12" align="right">  
-										<button type="sumbit" class="btn btn-pinterest btn-block btn-danger waves-effect waves-light">
-											<span><i class="icon-logout"></i></span>Cerrar Sesión</button>
+										<button type="submit" class="btn btn-pinterest btn-block btn-danger waves-effect waves-light" name="cerrarSesion" value="1">		
+											<span><i class="icon-logout"></i></span>Cerrar Sesión</button></button>		
 									 </div>	 
 								   </form>
 							   	</div>
@@ -263,9 +263,31 @@ $u = new usuarioDB();
 						  
 							   <a class="accordion-msg bg-danger b-none">Eliminar Cuenta</a>
 							   <div class="accordion-desc">
-								  <p>
-									 Esta parte la dejaremos para mas adelante, ya que para el borrado de la cuenta tenemos que tener en cuenta todos los factores que esto conlleva. Es por ello que hasta que no toquemos cada una de las partes que compone el proyecto no se va a proceder con este borrado.
-								  </p>
+								   
+								</br>                       
+							   	<div class="row">
+								   <form class="form-inline" action="../controller/perfilController.php" method="post">
+									 <div class="col-md-8 col-xs-12 form-group">
+										<label class="form-control-label"> ¿Está seguro de que quiere eliminar su cuenta? </label>
+									 </div>
+									   
+									<div class="col-md-4 col-xs-12 form-group" align="center" >
+										<label for="checkEliminar" class="form-control-label">
+											<input id="checkEliminar" class="form-check-input" type="checkbox" required> Confirmar
+										</label>
+									</div>	
+									   
+									 <div class="col-md-4 col-xs-12" style="float: right">
+									
+
+										<button type="submit" class="btn btn-pinterest btn-block btn-danger waves-effect waves-light" name="eliminarPerfil" value="1">		
+											<span><i class="icon-trash"></i></span>Eliminar</button></button>									 
+										</div>
+ 
+								   </form>
+							   	</div>
+								   
+								   
 							   </div>
 							</div>
 						 </div>	

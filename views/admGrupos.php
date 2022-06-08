@@ -241,7 +241,7 @@ $gr = new GrupoDB();
 							
 						   <div style="text-align: center;">
 							 <span style="font-size: 100px; color: #3D505A;" ><i class="icofont icofont-users-social "></i></span>
-							 <h3>Sin contactos no tenemos usuarios para poder crear un grupo. Añade contactos para poder a empezar a crear grupos.</h3>			
+							 <h3> Añade contactos para poder a empezar a crear grupos de astronautas. </h3>			
 						   </div>
 						   </br>
 						   <div class="col-md-12 text-center">

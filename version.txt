@@ -76,7 +76,14 @@ XX/XX/XXXX - ULTIMAS MODIFICACIONES
 - Borrar grupos con actividades ahora borra actividades y todo lo que ello conlleva.
 - El menu de tareas ya no tiene problema en mostrar incorrectamente el menu para cambiar de columna.
 
-- 
+- Nota Rápida ya se puede dejar vacía
+- Ahora al iniciar Sesión si no se pulsa el checkbox de "Recuérdame", la sesión dura 30 min.
+- Un usuario que no esté en la actividad o en el grupo de la actividad no podrá acceder introduciendo el parametro en el navegador.
+- Un usuario que no esté en el grupo no podrá acceder introduciendo el parametro en el navegador.
+- Añadida la funcionalidad de borrar la cuenta.
+
+
+
 
 
 
@@ -85,42 +92,30 @@ COSAS PENDIENTES
 
 *GENERICO
 - Revisar el despliegue de Actividades y Grupos en el navbar, no se despliega correctamente en ciertas situaciones. Cuando se repliega el navbar y se quiere seleccionar la casilla de Actividades o Grupos no funciona como deberia. 
-- Tooltip para todo.
-- Mensajes cuando empty para todo
-- Mensaje de control para crear evento.
-- No permitir ir a actividades, cambiado el id en los parametros de la url.
 
 
 *ACTIVIDAD
-- Al eliminar una tarea, se debe actualizar la posición del resto de tareas. No es necesario porque al modificar se cambia de nuevo todas las posiciones.
-- Tareas que se le añaden solo numeros no se crean bien
+- Tareas que se le añaden solo numeros no se crean correctamente.
 
 
 *GRUPOS
 
 
 *CONTACTOS
-- Al eliminar el contacto, ya no podremos eliminarlo de un grupo. En el caso de que estemos los dos no se podria echar a esa persona.
 
 
 *PERFIL
-- Añadir mensaje de control para la foto de perfil.
 
 
 *CALENDARIO
-- Colores personalizados para los eventos
-- Poner height en card de Mayo/Octubre
-- Responsive antes de cierto tamaño
 
 
 *USUARIO
-- Descomentar el control de tiempo de Sesión en SessionBean cuando se termine.
-- Cuando se pulse recuerdame, tiempo de sesion infinito.
 
 
 /////////////////////////////////////////////////////////////////////////////////
 DUDAS
-- Al eliminar el contacto, ya no podremos eliminarlo de un grupo. En el caso de que estemos los dos no se podria echar a esa persona.
+
 
 
 

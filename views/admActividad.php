@@ -65,7 +65,7 @@ $a = new ActividadDB();
 						 <div id="blank" style="min-height: 50px; margin: 0 auto"></div>
 						 <div style="text-align: center;">
 						  <span style="font-size: 200px; color: #3D505A;" ><i class="icofont icofont-magic"></i></span>
-						  <h3> ¿Que piensas que esta aplicación es mágica? Estamos trabajando para ello pero si no añades alguna actividad/es no vamos a poder ayudarte a organizar nada. </h3>			
+						  <h3> ¿Piensas que esta aplicación es mágica? Estamos trabajando para ello pero si no añades alguna actividad/es no vamos a poder ayudarte a organizar nada. </h3>			
 						 </div>
 
 						<?php else:?>							

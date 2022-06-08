@@ -62,7 +62,7 @@ export default class KanbanAPI {
 		if (!Array.isArray(newPriority) ){
 			item.priority = newPriority.priority;
 			
-			// Update Content and Priority on BBDD		
+			// Update Content and Priority on BBDD	
 			update(itemId, newProps.content, newPriority.priority);
 		}
 

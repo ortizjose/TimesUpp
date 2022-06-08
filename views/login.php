@@ -120,7 +120,7 @@ $s = new SessionBean();
 							<div class="col-sm-6 col-xs-12">
 							<div class="rkmd-checkbox checkbox-rotate checkbox-ripple m-b-25">
 								<label class="input-checkbox checkbox-primary">
-									<input type="checkbox" id="checkbox">
+									<input type="checkbox" id="checkbox" name="guardarSesion">
 									<span class="checkbox"></span>
 								</label>
 								<div class="captions">Recuérdame</div>

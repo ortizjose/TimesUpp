@@ -213,16 +213,14 @@ $e = new EventoDB();
 		  
 		  if ( contNota != document.getElementById("notaRapida").value ) {
 			  
-			  console.log("DIFERENTES");
-			  
 			  var url = "../controller/indexController.php";
 			  var http = new XMLHttpRequest();
 
-			  http.open("GET", url+"?"+"nota="+document.getElementById("notaRapida").value, true);
+			  http.open("GET", url+"?cambio=1"+"&nota="+document.getElementById("notaRapida").value, true);
 			  http.onreadystatechange = function()
 			  {
 				if(http.readyState == 4 && http.status == 200) {
-				  console.log(http.responseText);
+
 				}
 			  }
 			  http.send(null)			  
