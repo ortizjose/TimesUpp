@@ -100,10 +100,8 @@ $u = new UsuarioDB();
 // ELIMINAR PERFIL
     elseif ( !empty($_POST['eliminarPerfil']) ){ 
 
-		echo "BORRAR";
 		
 		$res = $u -> eliminarUsuario($idUsu);
-		
 		
 		if($res):
 			$s -> closeSession();
