@@ -153,6 +153,9 @@ class ActividadDB {
 	
 	public function perteneceAActividad($idUsu, $idAct)
 	{
+		if(!is_numeric($idAct))
+			return false;
+
 		$sentence = $this -> dbc->prepare("SELECT IdUsu, IdGrupo FROM ACTIVIDAD WHERE IdAct = $idAct");
 		$sentence->execute();
 		$actividad=$sentence->fetch();
@@ -169,9 +172,9 @@ class ActividadDB {
 				
 			endif;
 		
-		else:							//Actividad Grupal
-			echo "GRUPO:".$actividad[1]; 
-		
+		elseif (!empty($actividad[1])):							//Actividad Grupal
+
+			
 			$sentence = $this -> dbc->prepare("SELECT * FROM USUARIOGRUPO WHERE IdUsu = $idUsu AND IdGrupo = $actividad[1]");
 			$sentence->execute();
 			$res=$sentence->fetch();
@@ -181,6 +184,9 @@ class ActividadDB {
 			else
 				return false;
 			
+		else:
+			return false;
+		
 		endif;
 		
 		

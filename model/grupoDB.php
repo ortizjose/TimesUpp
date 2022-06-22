@@ -236,7 +236,9 @@ class GrupoDB {
 	
 	public function perteneceAGrupo($idUsu, $idGrupo)
 	{
-
+		if(!is_numeric($idGrupo))
+			return false;
+		
 		$sentence = $this -> dbc->prepare("SELECT * FROM USUARIOGRUPO WHERE IdUsu = $idUsu AND IdGrupo = $idGrupo");
 		$sentence->execute();
 		$res=$sentence->fetch();
